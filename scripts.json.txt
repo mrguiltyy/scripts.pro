@@ -1,8 +1,1 @@
-[
-  {
-    "name": "Rust No Recoil",
-    "game": "Rust",
-    "type": "Free",
-    "file": "/scripts/rust-norecoil.gpc"
-  }
-]
+
