@@ -85,11 +85,10 @@ function buildPartners(partners) {
 /* ── Banners ── */
 function buildBanners(banners) {
   const map = {
-    'hero-bottom': 'slot-hero',
-    'mid-content': 'slot-mid',
-    'sidebar':     'slot-sidebar',
-    'pre-footer':  'slot-footer'
-  };
+  'hero-bottom': 'slot-hero',
+  'mid-content': 'slot-mid',
+  'pre-footer':  'slot-footer'
+};
   banners.forEach(b => {
     const id   = map[b.position];
     if (!id) return;
