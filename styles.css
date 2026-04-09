@@ -421,14 +421,7 @@ img { max-width: 100%; display: block; }
 /* LOAD MORE */
 .load-more-wrap { display: flex; justify-content: center; padding: 10px 0; }
 
-/* SIDEBAR */
-.scripts-sidebar { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 88px; }
-.sidebar-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
-.sidebar-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-.sidebar-stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem; }
-.sidebar-stat-row:last-child { border-bottom: none; }
-.sidebar-stat-row span:first-child { color: var(--muted); }
-.sidebar-stat-row span:last-child { color: var(--text); font-weight: 600; }
+
 
 /* MODAL */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
