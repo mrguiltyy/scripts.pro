@@ -4,10 +4,178 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Advertise — ZenScripts</title>
+  <meta name="description" content="Advertise on ZenScripts. Join our Discord and open a ticket to get started." />
   <link rel="stylesheet" href="./styles.css" />
-  <link rel="stylesheet" href="./adform.css" />
-  <link  rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    .advertise-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .advertise-content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .advertise-content h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      color: var(--text);
+      margin: 20px 0 18px;
+      line-height: 1.1;
+    }
+    .advertise-content p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .advertise-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin: 36px 0;
+      text-align: left;
+    }
+    .advertise-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      transition: border-color 0.2s;
+    }
+    .advertise-step:hover { border-color: var(--accent); }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .step-text p {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .advertise-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .btn-discord {
+      background: #5865f2;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(88,101,242,0.4);
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-discord:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(88,101,242,0.55);
+    }
+    .advertise-placements {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 36px 0;
+      text-align: left;
+    }
+    .placement-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.2s;
+    }
+    .placement-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+    .placement-card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .placement-card h3 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .placement-card p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin: 0; }
+    .placement-card .placement-size {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.7rem;
+      color: var(--accent);
+      background: rgba(108,99,255,0.1);
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-weight: 600;
+    }
+    .advertise-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 36px;
+    }
+    .adv-stat { display: flex; flex-direction: column; align-items: center; padding: 0 28px; }
+    .adv-stat-n {
+      font-size: 1.7rem;
+      font-weight: 900;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .adv-stat-l { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 3px; }
+    .adv-stat-div { width: 1px; height: 32px; background: var(--border); }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    @media (max-width: 600px) {
+      .advertise-stats { flex-wrap: wrap; gap: 16px; }
+      .adv-stat-div { display: none; }
+      .adv-stat { padding: 0 16px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -33,568 +201,157 @@
     </div>
   </nav>
 
-  <div class="adform-hero">
+  <div class="advertise-page">
     <div class="hero-bg">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
       <div class="hero-grid"></div>
     </div>
-    <div class="adform-hero-content">
+
+    <div class="advertise-content">
+
       <div class="hero-badge">💼 Advertising</div>
       <h1>Advertise on <span class="gradient-text">ZenScripts</span></h1>
-      <p>Reach thousands of active gamers every day. Fill out the form below and we will get back to you within 24 hours.</p>
-    </div>
-  </div>
+      <p>Reach thousands of active gamers every single day. Getting started is simple — just join our Discord and open an advertising ticket.</p>
+      <p>We will get back to you within <strong style="color:var(--text)">24 hours</strong> to discuss placements, pricing, and creative assets.</p>
 
-  <div class="adform-stats">
-    <div class="astat"><span class="astat-n">10K+</span><span class="astat-l">Daily Visitors</span></div>
-    <div class="astat-div"></div>
-    <div class="astat"><span class="astat-n">500+</span><span class="astat-l">Free Scripts</span></div>
-    <div class="astat-div"></div>
-    <div class="astat"><span class="astat-n">4</span><span class="astat-l">Ad Placements</span></div>
-    <div class="astat-div"></div>
-    <div class="astat"><span class="astat-n">24hr</span><span class="astat-l">Response Time</span></div>
-  </div>
-
-  <main class="adform-main">
-    <div class="adform-wrap">
-
-      <aside class="adform-sidebar">
-
-        <div class="aform-card">
-          <h3>📍 Ad Placements</h3>
-          <div class="placement-list">
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Hero Banner</span>
-                <span class="placement-badge hot">🔥 Hot</span>
-              </div>
-              <p>Full-width banner directly below the hero. First thing visitors see.</p>
-              <div class="placement-meta">
-                <span>📐 1200×120px</span>
-                <span>👁️ Highest Visibility</span>
-              </div>
-            </div>
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Mid-Content Banner</span>
-                <span class="placement-badge pop">⭐ Popular</span>
-              </div>
-              <p>Wide banner between script categories. Seen by active browsers.</p>
-              <div class="placement-meta">
-                <span>📐 1200×120px</span>
-                <span>👁️ High Visibility</span>
-              </div>
-            </div>
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Sidebar Box</span>
-                <span class="placement-badge">📦 Box</span>
-              </div>
-              <p>Square sidebar ad shown alongside the script grid.</p>
-              <div class="placement-meta">
-                <span>📐 300×300px</span>
-                <span>👁️ Persistent</span>
-              </div>
-            </div>
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Pre-Footer Banner</span>
-                <span class="placement-badge">📌 Footer</span>
-              </div>
-              <p>Full-width banner above the footer. Seen by users who scroll all content.</p>
-              <div class="placement-meta">
-                <span>📐 1200×120px</span>
-                <span>👁️ Good Reach</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="aform-card">
-          <h3>📋 What We Accept</h3>
-          <ul class="accept-list">
-            <li>✅ Gaming products and services</li>
-            <li>✅ Software and tools</li>
-            <li>✅ SMM panels and growth services</li>
-            <li>✅ Game servers and communities</li>
-            <li>✅ Digital products and downloads</li>
-            <li>✅ Streaming and content services</li>
-            <li>❌ Illegal content or services</li>
-            <li>❌ Malware or harmful software</li>
-            <li>❌ Misleading advertisements</li>
-          </ul>
-        </div>
-
-        <div class="aform-card">
-          <h3>💬 Questions?</h3>
-          <p>Reach out before submitting if you have questions about placements or pricing.</p>
-          <a href="mailto:ads@zenscripts.pro" class="contact-link">📧 ads@zenscripts.pro</a>
-          <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener" class="contact-link">🎮 Discord Server</a>
-        </div>
-
-      </aside>
-
-      <div class="adform-form-wrap">
-        <div class="form-card">
-          <div class="form-card-head">
-            <h2>📝 Ad Order Form</h2>
-            <p>Fill out all required fields. We review every submission and respond within 24 hours.</p>
-          </div>
-
-          <form id="ad-form" novalidate>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">01</span> Your Information</div>
-              <div class="form-row two-col">
-                <div class="form-group">
-                  <label>First Name <span class="req">*</span></label>
-                  <input type="text" id="firstName" placeholder="John" required />
-                  <span class="ferr" id="err-firstName"></span>
-                </div>
-                <div class="form-group">
-                  <label>Last Name <span class="req">*</span></label>
-                  <input type="text" id="lastName" placeholder="Doe" required />
-                  <span class="ferr" id="err-lastName"></span>
-                </div>
-              </div>
-              <div class="form-row two-col">
-                <div class="form-group">
-                  <label>Email Address <span class="req">*</span></label>
-                  <input type="email" id="email" placeholder="john@example.com" required />
-                  <span class="ferr" id="err-email"></span>
-                </div>
-                <div class="form-group">
-                  <label>Discord Username</label>
-                  <input type="text" id="discord" placeholder="username" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Company / Brand Name <span class="req">*</span></label>
-                <input type="text" id="company" placeholder="Your brand or company name" required />
-                <span class="ferr" id="err-company"></span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">02</span> Advertisement Details</div>
-              <div class="form-group">
-                <label>Destination URL <span class="req">*</span></label>
-                <input type="url" id="adUrl" placeholder="https://yourwebsite.com" required />
-                <span class="fhint">Where users go when they click your ad.</span>
-                <span class="ferr" id="err-adUrl"></span>
-              </div>
-              <div class="form-group">
-                <label>Ad Headline <span class="req">*</span></label>
-                <input type="text" id="adTitle" placeholder="e.g. Get Premium Scripts at ZenScripts Pro" maxlength="80" required />
-                <span class="fhint char-count" id="count-adTitle">0 / 80</span>
-                <span class="ferr" id="err-adTitle"></span>
-              </div>
-              <div class="form-group">
-                <label>Ad Description <span class="req">*</span></label>
-                <textarea id="adDesc" placeholder="Describe your product or service..." maxlength="300" rows="4" required></textarea>
-                <span class="fhint char-count" id="count-adDesc">0 / 300</span>
-                <span class="ferr" id="err-adDesc"></span>
-              </div>
-              <div class="form-group">
-                <label>Ad Placement <span class="req">*</span></label>
-                <div class="placement-grid">
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="hero" required />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">🔥</span>
-                      <span class="poc-name">Hero Banner</span>
-                      <span class="poc-size">1200×120px</span>
-                    </div>
-                  </label>
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="mid" />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">⭐</span>
-                      <span class="poc-name">Mid-Content</span>
-                      <span class="poc-size">1200×120px</span>
-                    </div>
-                  </label>
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="sidebar" />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">📦</span>
-                      <span class="poc-name">Sidebar Box</span>
-                      <span class="poc-size">300×300px</span>
-                    </div>
-                  </label>
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="footer" />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">📌</span>
-                      <span class="poc-name">Pre-Footer</span>
-                      <span class="poc-size">1200×120px</span>
-                    </div>
-                  </label>
-                </div>
-                <span class="ferr" id="err-placement"></span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">03</span> Creative Assets</div>
-              <div class="form-group">
-                <label>Banner Image URL</label>
-                <input type="url" id="adImage" placeholder="https://yoursite.com/banner.png" />
-                <span class="fhint">Link to your banner image matching the placement dimensions.</span>
-              </div>
-              <div class="form-group">
-                <label>Logo URL</label>
-                <input type="url" id="adLogo" placeholder="https://yoursite.com/logo.png" />
-                <span class="fhint">Optional. Your brand logo shown alongside the ad.</span>
-              </div>
-              <div class="form-group">
-                <label>Call To Action Text</label>
-                <input type="text" id="adCta" placeholder="e.g. Shop Now, Learn More, Get Started" maxlength="30" />
-                <span class="fhint char-count" id="count-adCta">0 / 30</span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">04</span> Campaign Details</div>
-              <div class="form-row two-col">
-                <div class="form-group">
-                  <label>Start Date <span class="req">*</span></label>
-                  <input type="date" id="startDate" required />
-                  <span class="ferr" id="err-startDate"></span>
-                </div>
-                <div class="form-group">
-                  <label>End Date <span class="req">*</span></label>
-                  <input type="date" id="endDate" required />
-                  <span class="ferr" id="err-endDate"></span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Quick Duration</label>
-                <div class="duration-pills">
-                  <button type="button" class="dur-pill" data-days="7">1 Week</button>
-                  <button type="button" class="dur-pill" data-days="14">2 Weeks</button>
-                  <button type="button" class="dur-pill" data-days="30">1 Month</button>
-                  <button type="button" class="dur-pill" data-days="90">3 Months</button>
-                  <button type="button" class="dur-pill" data-days="180">6 Months</button>
-                </div>
-                <span class="fhint">Click to auto-fill dates above.</span>
-              </div>
-              <div class="form-group">
-                <label>Budget Range</label>
-                <select id="budget">
-                  <option value="" disabled selected>Select your budget</option>
-                  <option value="under-50">Under $50</option>
-                  <option value="50-100">$50 – $100</option>
-                  <option value="100-250">$100 – $250</option>
-                  <option value="250-500">$250 – $500</option>
-                  <option value="500-1000">$500 – $1,000</option>
-                  <option value="1000+">$1,000+</option>
-                  <option value="discuss">Prefer to Discuss</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Additional Notes</label>
-                <textarea id="notes" placeholder="Target audience, special requests, or anything else..." rows="4" maxlength="500"></textarea>
-                <span class="fhint char-count" id="count-notes">0 / 500</span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">05</span> Agreement</div>
-                rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-</head>
-<body>
-
-  <nav class="navbar" id="navbar">
-    <div class="nav-inner">
-      <a href="./index.html" class="nav-logo">
-        <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="nav-logo-img" />
-        <span class="nav-logo-text">ZenScripts</span>
-      </a>
-      <div class="nav-links">
-        <a href="./index.html#scripts" class="nav-link">Scripts</a>
-        <a href="./index.html#partners" class="nav-link">Partners</a>
-        <a href="./ad-form.html" class="nav-link nav-cta">Advertise</a>
+      <div class="advertise-stats">
+        <div class="adv-stat"><span class="adv-stat-n">10K+</span><span class="adv-stat-l">Daily Visitors</span></div>
+        <div class="adv-stat-div"></div>
+        <div class="adv-stat"><span class="adv-stat-n">500+</span><span class="adv-stat-l">Free Scripts</span></div>
+        <div class="adv-stat-div"></div>
+        <div class="adv-stat"><span class="adv-stat-n">4</span><span class="adv-stat-l">Ad Spots</span></div>
+        <div class="adv-stat-div"></div>
+        <div class="adv-stat"><span class="adv-stat-n">24hr</span><span class="adv-stat-l">Response</span></div>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-    <div class="mobile-menu" id="mobile-menu">
-      <a href="./index.html#scripts">Scripts</a>
-      <a href="./index.html#partners">Partners</a>
-      <a href="./ad-form.html">Advertise</a>
-    </div>
-  </nav>
 
-  <div class="adform-hero">
-    <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="hero-grid"></div>
-    </div>
-    <div class="adform-hero-content">
-      <div class="hero-badge">💼 Advertising</div>
-      <h1>Advertise on <span class="gradient-text">ZenScripts</span></h1>
-      <p>Reach thousands of active gamers every day. Fill out the form below and we will get back to you within 24 hours.</p>
+      <div class="section-title">How it works</div>
+      <div class="advertise-steps">
+        <div class="advertise-step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <h3>Join our Discord</h3>
+            <p>Click the button below to join the ZenScripts Discord server. It is free and takes less than 30 seconds.</p>
+          </div>
+        </div>
+        <div class="advertise-step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <h3>Open an Advertising Ticket</h3>
+            <p>Head to the tickets channel and open a new ticket. Select the Advertising category when prompted.</p>
+          </div>
+        </div>
+        <div class="advertise-step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <h3>Tell us about your ad</h3>
+            <p>Share your website, what you want to promote, your preferred placement, and your budget. We will handle the rest.</p>
+          </div>
+        </div>
+        <div class="advertise-step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <h3>Go live</h3>
+            <p>Once agreed we will place your ad live on the site. Usually within 24 hours of finalising details.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="advertise-btns">
+        <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener" class="btn-discord">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.098 0 0 0 .372.292.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          Join our Discord
+        </a>
+        <a href="./index.html" class="btn btn-ghost">Back to Scripts</a>
+      </div>
+
+      <div class="section-title" style="margin-top:48px;">Available Ad Placements</div>
+      <div class="advertise-placements">
+        <div class="placement-card">
+          <div class="placement-card-icon">🔥</div>
+          <h3>Hero Banner</h3>
+          <p>Full-width banner directly below the hero section. The first thing every visitor sees.</p>
+          <span class="placement-size">1200 × 120px</span>
+        </div>
+        <div class="placement-card">
+          <div class="placement-card-icon">⭐</div>
+          <h3>Mid-Content Banner</h3>
+          <p>Wide banner between the script categories. Seen by users actively browsing scripts.</p>
+          <span class="placement-size">1200 × 120px</span>
+        </div>
+        <div class="placement-card">
+          <div class="placement-card-icon">📦</div>
+          <h3>Sidebar Box</h3>
+          <p>Square ad shown alongside the script grid. Stays visible as users scroll through scripts.</p>
+          <span class="placement-size">300 × 300px</span>
+        </div>
+        <div class="placement-card">
+          <div class="placement-card-icon">📌</div>
+          <h3>Pre-Footer Banner</h3>
+          <p>Full-width banner above the footer. Seen by users who scroll through all the content.</p>
+          <span class="placement-size">1200 × 120px</span>
+        </div>
+      </div>
+
+      <div class="advertise-step" style="margin-top:8px;text-align:left;">
+        <div class="step-num">💬</div>
+        <div class="step-text">
+          <h3>Have a question before joining?</h3>
+          <p>Email us directly at <a href="mailto:ads@zenscripts.pro" style="color:var(--accent);">ads@zenscripts.pro</a> and we will get back to you as soon as possible.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="adform-stats">
-    <div class="astat"><span class="astat-n">10K+</span><span class="astat-l">Daily Visitors</span></div>
-    <div class="astat-div"></div>
-    <div class="astat"><span class="astat-n">500+</span><span class="astat-l">Free Scripts</span></div>
-    <div class="astat-div"></div>
-    <div class="astat"><span class="astat-n">4</span><span class="astat-l">Ad Placements</span></div>
-    <div class="astat-div"></div>
-    <div class="astat"><span class="astat-n">24hr</span><span class="astat-l">Response Time</span></div>
-  </div>
-
-  <main class="adform-main">
-    <div class="adform-wrap">
-
-      <aside class="adform-sidebar">
-
-        <div class="aform-card">
-          <h3>📍 Ad Placements</h3>
-          <div class="placement-list">
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Hero Banner</span>
-                <span class="placement-badge hot">🔥 Hot</span>
-              </div>
-              <p>Full-width banner directly below the hero. First thing visitors see.</p>
-              <div class="placement-meta">
-                <span>📐 1200×120px</span>
-                <span>👁️ Highest Visibility</span>
-              </div>
-            </div>
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Mid-Content Banner</span>
-                <span class="placement-badge pop">⭐ Popular</span>
-              </div>
-              <p>Wide banner between script categories. Seen by active browsers.</p>
-              <div class="placement-meta">
-                <span>📐 1200×120px</span>
-                <span>👁️ High Visibility</span>
-              </div>
-            </div>
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Sidebar Box</span>
-                <span class="placement-badge">📦 Box</span>
-              </div>
-              <p>Square sidebar ad shown alongside the script grid.</p>
-              <div class="placement-meta">
-                <span>📐 300×300px</span>
-                <span>👁️ Persistent</span>
-              </div>
-            </div>
-            <div class="placement-item">
-              <div class="placement-item-top">
-                <span class="placement-name">Pre-Footer Banner</span>
-                <span class="placement-badge">📌 Footer</span>
-              </div>
-              <p>Full-width banner above the footer. Seen by users who scroll all content.</p>
-              <div class="placement-meta">
-                <span>📐 1200×120px</span>
-                <span>👁️ Good Reach</span>
-              </div>
-            </div>
-          </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="footer-logo-img" />
+          <p>Free scripts for the gaming community. No paywalls. No limits.</p>
         </div>
-
-        <div class="aform-card">
-          <h3>📋 What We Accept</h3>
-          <ul class="accept-list">
-            <li>✅ Gaming products and services</li>
-            <li>✅ Software and tools</li>
-            <li>✅ SMM panels and growth services</li>
-            <li>✅ Game servers and communities</li>
-            <li>✅ Digital products and downloads</li>
-            <li>✅ Streaming and content services</li>
-            <li>❌ Illegal content or services</li>
-            <li>❌ Malware or harmful software</li>
-            <li>❌ Misleading advertisements</li>
-          </ul>
+        <div class="footer-col">
+          <h4>Site</h4>
+          <a href="./index.html#scripts">Browse Scripts</a>
+          <a href="./index.html#partners">Partners</a>
+          <a href="./ad-form.html">Advertise</a>
         </div>
-
-        <div class="aform-card">
-          <h3>💬 Questions?</h3>
-          <p>Reach out before submitting if you have questions about placements or pricing.</p>
-          <a href="mailto:ads@zenscripts.pro" class="contact-link">📧 ads@zenscripts.pro</a>
-          <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener" class="contact-link">🎮 Discord Server</a>
+        <div class="footer-col">
+          <h4>Partners</h4>
+          <a href="https://cheapsmm.lol" target="_blank" rel="noopener">CheapSMM</a>
+          <a href="https://zenscripts.pro" target="_blank" rel="noopener">ZenScripts Pro</a>
         </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener">Discord</a>
+          <a href="./ad-form.html">Place an Ad</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 ZenScripts. All rights reserved.</p>
+        <p class="footer-disc">Scripts are provided for educational purposes. Use responsibly.</p>
+      </div>
+    </div>
+  </footer>
 
-      </aside>
+  <script>
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
-      <div class="adform-form-wrap">
-        <div class="form-card">
-          <div class="form-card-head">
-            <h2>📝 Ad Order Form</h2>
-            <p>Fill out all required fields. We review every submission and respond within 24 hours.</p>
-          </div>
+    const hamburger  = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+      });
+    }
+  </script>
 
-          <form id="ad-form" novalidate>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">01</span> Your Information</div>
-              <div class="form-row two-col">
-                <div class="form-group">
-                  <label>First Name <span class="req">*</span></label>
-                  <input type="text" id="firstName" placeholder="John" required />
-                  <span class="ferr" id="err-firstName"></span>
-                </div>
-                <div class="form-group">
-                  <label>Last Name <span class="req">*</span></label>
-                  <input type="text" id="lastName" placeholder="Doe" required />
-                  <span class="ferr" id="err-lastName"></span>
-                </div>
-              </div>
-              <div class="form-row two-col">
-                <div class="form-group">
-                  <label>Email Address <span class="req">*</span></label>
-                  <input type="email" id="email" placeholder="john@example.com" required />
-                  <span class="ferr" id="err-email"></span>
-                </div>
-                <div class="form-group">
-                  <label>Discord Username</label>
-                  <input type="text" id="discord" placeholder="username" />
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Company / Brand Name <span class="req">*</span></label>
-                <input type="text" id="company" placeholder="Your brand or company name" required />
-                <span class="ferr" id="err-company"></span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">02</span> Advertisement Details</div>
-              <div class="form-group">
-                <label>Destination URL <span class="req">*</span></label>
-                <input type="url" id="adUrl" placeholder="https://yourwebsite.com" required />
-                <span class="fhint">Where users go when they click your ad.</span>
-                <span class="ferr" id="err-adUrl"></span>
-              </div>
-              <div class="form-group">
-                <label>Ad Headline <span class="req">*</span></label>
-                <input type="text" id="adTitle" placeholder="e.g. Get Premium Scripts at ZenScripts Pro" maxlength="80" required />
-                <span class="fhint char-count" id="count-adTitle">0 / 80</span>
-                <span class="ferr" id="err-adTitle"></span>
-              </div>
-              <div class="form-group">
-                <label>Ad Description <span class="req">*</span></label>
-                <textarea id="adDesc" placeholder="Describe your product or service..." maxlength="300" rows="4" required></textarea>
-                <span class="fhint char-count" id="count-adDesc">0 / 300</span>
-                <span class="ferr" id="err-adDesc"></span>
-              </div>
-              <div class="form-group">
-                <label>Ad Placement <span class="req">*</span></label>
-                <div class="placement-grid">
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="hero" required />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">🔥</span>
-                      <span class="poc-name">Hero Banner</span>
-                      <span class="poc-size">1200×120px</span>
-                    </div>
-                  </label>
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="mid" />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">⭐</span>
-                      <span class="poc-name">Mid-Content</span>
-                      <span class="poc-size">1200×120px</span>
-                    </div>
-                  </label>
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="sidebar" />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">📦</span>
-                      <span class="poc-name">Sidebar Box</span>
-                      <span class="poc-size">300×300px</span>
-                    </div>
-                  </label>
-                  <label class="placement-opt">
-                    <input type="radio" name="placement" value="footer" />
-                    <div class="placement-opt-card">
-                      <span class="poc-icon">📌</span>
-                      <span class="poc-name">Pre-Footer</span>
-                      <span class="poc-size">1200×120px</span>
-                    </div>
-                  </label>
-                </div>
-                <span class="ferr" id="err-placement"></span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">03</span> Creative Assets</div>
-              <div class="form-group">
-                <label>Banner Image URL</label>
-                <input type="url" id="adImage" placeholder="https://yoursite.com/banner.png" />
-                <span class="fhint">Link to your banner image matching the placement dimensions.</span>
-              </div>
-              <div class="form-group">
-                <label>Logo URL</label>
-                <input type="url" id="adLogo" placeholder="https://yoursite.com/logo.png" />
-                <span class="fhint">Optional. Your brand logo shown alongside the ad.</span>
-              </div>
-              <div class="form-group">
-                <label>Call To Action Text</label>
-                <input type="text" id="adCta" placeholder="e.g. Shop Now, Learn More, Get Started" maxlength="30" />
-                <span class="fhint char-count" id="count-adCta">0 / 30</span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">04</span> Campaign Details</div>
-              <div class="form-row two-col">
-                <div class="form-group">
-                  <label>Start Date <span class="req">*</span></label>
-                  <input type="date" id="startDate" required />
-                  <span class="ferr" id="err-startDate"></span>
-                </div>
-                <div class="form-group">
-                  <label>End Date <span class="req">*</span></label>
-                  <input type="date" id="endDate" required />
-                  <span class="ferr" id="err-endDate"></span>
-                </div>
-              </div>
-              <div class="form-group">
-                <label>Quick Duration</label>
-                <div class="duration-pills">
-                  <button type="button" class="dur-pill" data-days="7">1 Week</button>
-                  <button type="button" class="dur-pill" data-days="14">2 Weeks</button>
-                  <button type="button" class="dur-pill" data-days="30">1 Month</button>
-                  <button type="button" class="dur-pill" data-days="90">3 Months</button>
-                  <button type="button" class="dur-pill" data-days="180">6 Months</button>
-                </div>
-                <span class="fhint">Click to auto-fill dates above.</span>
-              </div>
-              <div class="form-group">
-                <label>Budget Range</label>
-                <select id="budget">
-                  <option value="" disabled selected>Select your budget</option>
-                  <option value="under-50">Under $50</option>
-                  <option value="50-100">$50 – $100</option>
-                  <option value="100-250">$100 – $250</option>
-                  <option value="250-500">$250 – $500</option>
-                  <option value="500-1000">$500 – $1,000</option>
-                  <option value="1000+">$1,000+</option>
-                  <option value="discuss">Prefer to Discuss</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Additional Notes</label>
-                <textarea id="notes" placeholder="Target audience, special requests, or anything else..." rows="4" maxlength="500"></textarea>
-                <span class="fhint char-count" id="count-notes">0 / 500</span>
-              </div>
-            </div>
-
-            <div class="form-section">
-              <div class="form-section-label"><span class="fsnum">05</span> Agreement</div>
+</body>
+</html>
