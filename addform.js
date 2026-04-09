@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   ADFORM.JS — ZenScripts Ad Form
+   ADFORM.JS — ZenScripts
 ═══════════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
+  }, { passive: true });
 
   /* ── Hamburger ── */
   const hamburger  = document.getElementById('hamburger');
@@ -22,12 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Character counters ── */
   const counters = [
-    { inputId: 'adTitle', countId: 'count-adTitle', max: 80 },
+    { inputId: 'adTitle', countId: 'count-adTitle', max: 80  },
     { inputId: 'adDesc',  countId: 'count-adDesc',  max: 300 },
-    { inputId: 'adCta',   countId: 'count-adCta',   max: 30 },
+    { inputId: 'adCta',   countId: 'count-adCta',   max: 30  },
     { inputId: 'notes',   countId: 'count-notes',   max: 500 },
   ];
-
   counters.forEach(({ inputId, countId, max }) => {
     const input   = document.getElementById(inputId);
     const counter = document.getElementById(countId);
@@ -47,19 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
     pill.addEventListener('click', () => {
       pills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-
       const days      = parseInt(pill.dataset.days);
-      const startDate = document.getElementById('startDate');
-      const endDate   = document.getElementById('endDate');
-      if (!startDate || !endDate) return;
-
+      const startEl   = document.getElementById('startDate');
+      const endEl     = document.getElementById('endDate');
+      if (!startEl || !endEl) return;
       const today = new Date();
       const end   = new Date();
       end.setDate(today.getDate() + days);
-
-      startDate.value = formatDate(today);
-      endDate.value   = formatDate(end);
-
+      startEl.value = formatDate(today);
+      endEl.value   = formatDate(end);
       clearError('startDate');
       clearError('endDate');
     });
@@ -72,64 +67,54 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${y}-${m}-${dd}`;
   }
 
-  /* ── Set min date for date inputs ── */
-  const today = formatDate(new Date());
+  /* ── Min dates ── */
+  const today      = formatDate(new Date());
   const startInput = document.getElementById('startDate');
   const endInput   = document.getElementById('endDate');
   if (startInput) startInput.min = today;
   if (endInput)   endInput.min   = today;
-
   if (startInput) {
     startInput.addEventListener('change', () => {
       if (endInput) endInput.min = startInput.value;
     });
   }
 
-  /* ── Form validation ── */
+  /* ── Clear errors on input ── */
   const form = document.getElementById('ad-form');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('input',  () => { clearError(el.id); el.classList.remove('invalid'); });
+    el.addEventListener('change', () => { clearError(el.id); el.classList.remove('invalid'); });
+  });
+
+  /* ── Form submit ── */
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    if (validateForm()) {
-      submitForm();
-    }
+    if (validateForm()) submitForm();
   });
 
-  /* ── Clear error on input ── */
-  const allInputs = form.querySelectorAll('input, textarea, select');
-  allInputs.forEach(input => {
-    input.addEventListener('input', () => {
-      clearError(input.id);
-      input.classList.remove('invalid');
-    });
-    input.addEventListener('change', () => {
-      clearError(input.id);
-      input.classList.remove('invalid');
-    });
-  });
-
+  /* ── Validation ── */
   function validateForm() {
     let valid = true;
 
-    /* Required text/email/url fields */
     const required = [
-      { id: 'firstName',  label: 'First name is required.' },
-      { id: 'lastName',   label: 'Last name is required.' },
-      { id: 'email',      label: 'Email address is required.' },
-      { id: 'company',    label: 'Company or brand name is required.' },
-      { id: 'adUrl',      label: 'Destination URL is required.' },
-      { id: 'adTitle',    label: 'Ad headline is required.' },
-      { id: 'adDesc',     label: 'Ad description is required.' },
-      { id: 'startDate',  label: 'Start date is required.' },
-      { id: 'endDate',    label: 'End date is required.' },
+      { id: 'firstName', msg: 'First name is required.' },
+      { id: 'lastName',  msg: 'Last name is required.' },
+      { id: 'email',     msg: 'Email address is required.' },
+      { id: 'company',   msg: 'Company or brand name is required.' },
+      { id: 'adUrl',     msg: 'Destination URL is required.' },
+      { id: 'adTitle',   msg: 'Ad headline is required.' },
+      { id: 'adDesc',    msg: 'Ad description is required.' },
+      { id: 'startDate', msg: 'Start date is required.' },
+      { id: 'endDate',   msg: 'End date is required.' },
     ];
 
-    required.forEach(({ id, label }) => {
+    required.forEach(({ id, msg }) => {
       const el = document.getElementById(id);
       if (!el) return;
       if (!el.value.trim()) {
-        showError(id, label);
+        showError(id, msg);
         el.classList.add('invalid');
         valid = false;
       }
@@ -138,8 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Email format */
     const emailEl = document.getElementById('email');
     if (emailEl && emailEl.value.trim()) {
-      const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailReg.test(emailEl.value.trim())) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
         showError('email', 'Please enter a valid email address.');
         emailEl.classList.add('invalid');
         valid = false;
@@ -149,18 +133,16 @@ document.addEventListener('DOMContentLoaded', () => {
     /* URL format */
     const urlEl = document.getElementById('adUrl');
     if (urlEl && urlEl.value.trim()) {
-      try {
-        new URL(urlEl.value.trim());
-      } catch {
+      try { new URL(urlEl.value.trim()); }
+      catch {
         showError('adUrl', 'Please enter a valid URL including https://');
         urlEl.classList.add('invalid');
         valid = false;
       }
     }
 
-    /* Placement radio */
-    const placementChosen = form.querySelector('input[name="placement"]:checked');
-    if (!placementChosen) {
+    /* Placement */
+    if (!form.querySelector('input[name="placement"]:checked')) {
       showError('placement', 'Please select an ad placement.');
       valid = false;
     }
@@ -200,51 +182,34 @@ document.addEventListener('DOMContentLoaded', () => {
     if (el) el.textContent = '';
   }
 
-  /* ── Submit form ── */
+  /* ── Submit ── */
   function submitForm() {
     const btn = document.getElementById('submit-btn');
-    if (btn) {
-      btn.textContent = 'Submitting...';
-      btn.disabled = true;
-    }
-
-    /* Simulate submission — replace with real fetch/API call */
-    setTimeout(() => {
-      showSuccess();
-    }, 1200);
+    if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; }
+    setTimeout(() => showSuccess(), 1200);
   }
 
+  /* ── Success screen ── */
   function showSuccess() {
     const formEl    = document.getElementById('ad-form');
     const successEl = document.getElementById('form-success');
     const detailsEl = document.getElementById('success-details');
 
     if (formEl)    formEl.classList.add('hidden');
-    if (successEl) {
-      successEl.classList.remove('hidden');
-      successEl.classList.add('visible');
-    }
+    if (successEl) successEl.classList.remove('hidden');
 
-    /* Show summary of what was submitted */
     if (detailsEl) {
-      const placement = document.querySelector('input[name="placement"]:checked')?.value || 'N/A';
-      const placementLabels = {
-        hero:    'Hero Banner',
-        mid:     'Mid-Content Banner',
-        sidebar: 'Sidebar Box',
-        footer:  'Pre-Footer Banner',
-      };
-
+      const placement = form.querySelector('input[name="placement"]:checked')?.value || 'N/A';
+      const labels    = { hero: 'Hero Banner', mid: 'Mid-Content Banner', sidebar: 'Sidebar Box', footer: 'Pre-Footer Banner' };
       const rows = [
-        { label: 'Name',      value: `${document.getElementById('firstName')?.value} ${document.getElementById('lastName')?.value}` },
-        { label: 'Email',     value: document.getElementById('email')?.value },
-        { label: 'Company',   value: document.getElementById('company')?.value },
-        { label: 'Placement', value: placementLabels[placement] || placement },
-        { label: 'Start',     value: document.getElementById('startDate')?.value },
-        { label: 'End',       value: document.getElementById('endDate')?.value },
-        { label: 'Budget',    value: document.getElementById('budget')?.value || 'Not specified' },
+        { label: 'Name',      value: `${document.getElementById('firstName')?.value || ''} ${document.getElementById('lastName')?.value || ''}`.trim() },
+        { label: 'Email',     value: document.getElementById('email')?.value     || '' },
+        { label: 'Company',   value: document.getElementById('company')?.value   || '' },
+        { label: 'Placement', value: labels[placement] || placement },
+        { label: 'Start',     value: document.getElementById('startDate')?.value || '' },
+        { label: 'End',       value: document.getElementById('endDate')?.value   || '' },
+        { label: 'Budget',    value: document.getElementById('budget')?.value    || 'Not specified' },
       ];
-
       detailsEl.innerHTML = rows.map(r => `
         <div class="sdet-row">
           <span>${r.label}</span>
@@ -254,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ── Submit Another button ── */
+  /* ── Submit another ── */
   const submitAnother = document.getElementById('submit-another');
   if (submitAnother) {
     submitAnother.addEventListener('click', () => {
@@ -262,47 +227,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const successEl = document.getElementById('form-success');
       const btn       = document.getElementById('submit-btn');
 
-      if (formEl) {
-        formEl.reset();
-        formEl.classList.remove('hidden');
-      }
-      if (successEl) {
-        successEl.classList.add('hidden');
-        successEl.classList.remove('visible');
-      }
-      if (btn) {
-        btn.textContent = 'Submit Ad Order →';
-        btn.disabled = false;
-      }
+      if (formEl)    { formEl.reset(); formEl.classList.remove('hidden'); }
+      if (successEl) successEl.classList.add('hidden');
+      if (btn)       { btn.textContent = 'Submit Ad Order →'; btn.disabled = false; }
 
-      /* Reset char counters */
-      const counters = [
-        { inputId: 'adTitle', countId: 'count-adTitle', max: 80 },
-        { inputId: 'adDesc',  countId: 'count-adDesc',  max: 300 },
-        { inputId: 'adCta',   countId: 'count-adCta',   max: 30 },
-        { inputId: 'notes',   countId: 'count-notes',   max: 500 },
-      ];
       counters.forEach(({ countId, max }) => {
         const el = document.getElementById(countId);
         if (el) el.textContent = `0 / ${max}`;
       });
 
-      /* Reset duration pills */
       document.querySelectorAll('.dur-pill').forEach(p => p.classList.remove('active'));
-
-      /* Clear all errors */
       document.querySelectorAll('.ferr').forEach(el => el.textContent = '');
       document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
 
-      /* Scroll to top of form */
       const formCard = document.querySelector('.form-card');
       if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
-
-});  /* ── Escape key closes modal ── */
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
 
 });
