@@ -1,8 +1,24 @@
 [
   {
-    "name": "Rust No Recoil",
-    "game": "Rust",
-    "type": "Free",
-    "file": "/scripts/rust-norecoil.gpc"
+    "name": "Rust Anti-Recoil V2",
+    "category": "Rust",
+    "price": 0,
+    "file": "/files/rust_v2.gpc",
+    "description": "Standard recoil compensation for all major Rust configurations."
+  },
+  {
+    "name": "Premium Apex Pack",
+    "category": "Apex",
+    "price": 15.00,
+    "sellhubId": "https://sellhub.io/p/your-id",
+    "description": "The ultimate Apex suite. Includes private bypass and sticky aim logic."
+  },
+  {
+    "name": "MW3 Rapid Aim",
+    "category": "MW3",
+    "price": 0,
+    "file": "/files/mw3_rapid.gpc",
+    "description": "Free MW3 aim enhancement, compatible with all weapons."
   }
+  // ...add all other scripts here
 ]
