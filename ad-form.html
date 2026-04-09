@@ -360,3 +360,251 @@
 
               <div class="form-group">
                 <label for="ad-logo-url
+                                <div class="form-group">
+                <label for="ad-logo-url" class="form-label">Logo URL</label>
+                <input
+                  type="url"
+                  id="ad-logo-url"
+                  name="adLogoUrl"
+                  class="form-input"
+                  placeholder="https://yoursite.com/logo.png"
+                />
+                <span class="form-hint">Optional. Your brand logo shown alongside the ad.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="ad-cta" class="form-label">Call To Action Text</label>
+                <input
+                  type="text"
+                  id="ad-cta"
+                  name="adCta"
+                  class="form-input"
+                  placeholder="e.g. Shop Now, Learn More, Get Started"
+                  maxlength="30"
+                />
+                <span class="form-hint char-count" id="cta-count">0 / 30 characters</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Ad Color Theme</label>
+                <div class="color-theme-grid">
+                  <label class="color-option">
+                    <input type="radio" name="colorTheme" value="purple" checked />
+                    <div class="color-swatch" style="background: linear-gradient(135deg,#6c63ff,#a855f7);">
+                      <span class="color-check">✓</span>
+                    </div>
+                    <span class="color-name">Purple</span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="colorTheme" value="blue" />
+                    <div class="color-swatch" style="background: linear-gradient(135deg,#3b82f6,#06b6d4);">
+                      <span class="color-check">✓</span>
+                    </div>
+                    <span class="color-name">Blue</span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="colorTheme" value="green" />
+                    <div class="color-swatch" style="background: linear-gradient(135deg,#10b981,#00d4aa);">
+                      <span class="color-check">✓</span>
+                    </div>
+                    <span class="color-name">Green</span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="colorTheme" value="red" />
+                    <div class="color-swatch" style="background: linear-gradient(135deg,#ef4444,#f97316);">
+                      <span class="color-check">✓</span>
+                    </div>
+                    <span class="color-name">Red</span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="colorTheme" value="gold" />
+                    <div class="color-swatch" style="background: linear-gradient(135deg,#f59e0b,#fbbf24);">
+                      <span class="color-check">✓</span>
+                    </div>
+                    <span class="color-name">Gold</span>
+                  </label>
+                  <label class="color-option">
+                    <input type="radio" name="colorTheme" value="custom" />
+                    <div class="color-swatch custom-swatch">
+                      <span>🎨</span>
+                    </div>
+                    <span class="color-name">Custom</span>
+                  </label>
+                </div>
+                <div class="custom-color-row" id="custom-color-row">
+                  <div class="form-row two-col">
+                    <div class="form-group">
+                      <label class="form-label">Primary Color</label>
+                      <div class="color-picker-wrap">
+                        <input type="color" id="custom-color-1" name="customColor1" class="color-picker" value="#6c63ff" />
+                        <input type="text" id="custom-color-1-hex" class="form-input color-hex-input" value="#6c63ff" maxlength="7" />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Secondary Color</label>
+                      <div class="color-picker-wrap">
+                        <input type="color" id="custom-color-2" name="customColor2" class="color-picker" value="#a855f7" />
+                        <input type="text" id="custom-color-2-hex" class="form-input color-hex-input" value="#a855f7" maxlength="7" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- SECTION: Campaign Info -->
+            <div class="form-section">
+              <div class="form-section-label">
+                <span class="form-section-num">04</span>
+                <span>Campaign Details</span>
+              </div>
+
+              <div class="form-row two-col">
+                <div class="form-group">
+                  <label for="start-date" class="form-label">Preferred Start Date <span class="required">*</span></label>
+                  <input
+                    type="date"
+                    id="start-date"
+                    name="startDate"
+                    class="form-input"
+                    required
+                  />
+                  <span class="form-error" id="error-start-date"></span>
+                </div>
+                <div class="form-group">
+                  <label for="end-date" class="form-label">Preferred End Date <span class="required">*</span></label>
+                  <input
+                    type="date"
+                    id="end-date"
+                    name="endDate"
+                    class="form-input"
+                    required
+                  />
+                  <span class="form-error" id="error-end-date"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Campaign Duration</label>
+                <div class="duration-pills" id="duration-pills">
+                  <button type="button" class="duration-pill" data-days="7">1 Week</button>
+                  <button type="button" class="duration-pill" data-days="14">2 Weeks</button>
+                  <button type="button" class="duration-pill" data-days="30">1 Month</button>
+                  <button type="button" class="duration-pill" data-days="90">3 Months</button>
+                  <button type="button" class="duration-pill" data-days="180">6 Months</button>
+                </div>
+                <span class="form-hint">Click a duration to auto-fill the dates above.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="budget" class="form-label">Estimated Budget</label>
+                <select id="budget" name="budget" class="form-input form-select">
+                  <option value="" disabled selected>Select your budget range</option>
+                  <option value="under-50">Under $50</option>
+                  <option value="50-100">$50 – $100</option>
+                  <option value="100-250">$100 – $250</option>
+                  <option value="250-500">$250 – $500</option>
+                  <option value="500-1000">$500 – $1,000</option>
+                  <option value="1000+">$1,000+</option>
+                  <option value="discuss">Prefer to Discuss</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="target-audience" class="form-label">Target Audience / Notes</label>
+                <textarea
+                  id="target-audience"
+                  name="targetAudience"
+                  class="form-input form-textarea"
+                  placeholder="Tell us about your target audience, any special requests, or additional notes for your campaign..."
+                  rows="4"
+                  maxlength="500"
+                ></textarea>
+                <span class="form-hint char-count" id="notes-count">0 / 500 characters</span>
+              </div>
+
+            </div>
+
+            <!-- SECTION: Agreement -->
+            <div class="form-section">
+              <div class="form-section-label">
+                <span class="form-section-num">05</span>
+                <span>Agreement</span>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="agree-terms" name="agreeTerms" required />
+                  <span class="checkbox-custom"></span>
+                  <span class="checkbox-text">
+                    I confirm that my advertisement complies with ZenScripts' advertising guidelines and does not contain illegal, harmful, or misleading content. <span class="required">*</span>
+                  </span>
+                </label>
+                <span class="form-error" id="error-agree-terms"></span>
+              </div>
+
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="agree-contact" name="agreeContact" required />
+                  <span class="checkbox-custom"></span>
+                  <span class="checkbox-text">
+                    I agree to be contacted by ZenScripts regarding my advertisement order. <span class="required">*</span>
+                  </span>
+                </label>
+                <span class="form-error" id="error-agree-contact"></span>
+              </div>
+
+            </div>
+
+            <!-- SUBMIT -->
+            <div class="form-submit-wrap">
+              <div class="form-submit-info">
+                <span>🔒 Your information is kept private and never shared.</span>
+                <span>⚡ We respond within 24 hours.</span>
+              </div>
+              <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
+                <span class="submit-text">Submit Ad Order</span>
+                <span class="submit-icon">→</span>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- SUCCESS STATE -->
+          <div class="form-success" id="form-success">
+            <div class="success-icon">✅</div>
+            <h2>Order Received!</h2>
+            <p>Thanks for your submission. We've received your ad order and will review it shortly. Expect a response within <strong>24 hours</strong> to the email you provided.</p>
+            <div class="success-details" id="success-details"></div>
+            <div class="success-actions">
+              <a href="index.html" class="btn btn-primary">Back to Scripts</a>
+              <button class="btn btn-ghost" id="submit-another">Submit Another</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">ZenScripts</span>
+      </div>
+      <p class="footer-copy">© 2024 ZenScripts. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#scripts">Scripts</a>
+        <a href="ad-form.html">Advertise</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="adform.js"></script>
+</body>
+</html>
+
