@@ -1,107 +1,145 @@
+Great catches on the optimizations. Let me fix all of it including the scripts not loading from JSON. The most likely cause is a path or syntax issue. Here is the complete fixed app.js with every optimization applied.
+
+---
+
+## app.js (complete optimized fixed file)
+
+```javascript
 /* ═══════════════════════════════════════════════════════════
-   APP.JS — ZenScripts
+   APP.JS — ZenScripts (Optimized)
 ═══════════════════════════════════════════════════════════ */
 
 const PAGE_SIZE = 12;
 
-let allScripts = [];
-let filtered   = [];
-let page       = 1;
+let allScripts     = [];
+let filtered       = [];
+let page           = 1;
 let activeCategory = 'all';
 let activeTag      = 'all';
 let searchQuery    = '';
 let sortMode       = 'popular';
+let searchTimeout  = null;
 
-/* ── Fetch data.json and boot ── */
-fetch('data.json')
-  .then(r => r.json())
-  .then(data => {
-    allScripts = data.scripts;
-    buildNav(data.site);
-    buildPartners(data.partners);
-    buildBanners(data.adBanners);
-    buildCategories(data.categories);
-    buildSidebarStats(data.scripts);
-    applyFilters();
-    bindEvents();
-  })
-  .catch(err => console.error('Failed to load data.json:', err));
+/* ══════════════════════════════════════════════
+   BOOT — fetch data.json
+══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
 
-/* ── Navbar scroll effect ── */
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+  fetch('./data.json')
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then(data => {
+      if (!data.scripts || !Array.isArray(data.scripts)) {
+        throw new Error('scripts array missing from data.json');
+      }
+      allScripts = data.scripts;
+      buildPartners(data.partners   || []);
+      buildBanners(data.adBanners   || []);
+      buildCategories(data.categories || []);
+      buildSidebarStats(data.scripts);
+      applyFilters();
+      bindEvents();
+    })
+    .catch(err => {
+      console.error('Failed to load data.json:', err);
+      const grid = document.getElementById('scripts-grid');
+      if (grid) {
+        grid.innerHTML = `
+          <div style="
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b6b8a;
+          ">
+            <div style="font-size:2.5rem;margin-bottom:12px;">⚠️</div>
+            <h3 style="color:#f0f0ff;margin-bottom:8px;">Failed to load scripts</h3>
+            <p>Could not load data.json. Make sure it is in the same folder as index.html.</p>
+            <p style="margin-top:8px;font-size:0.8rem;">Error: ${err.message}</p>
+          </div>
+        `;
+      }
+    });
+
+  /* Navbar scroll */
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
 });
 
-/* ── Build nav logo/title from site data ── */
-function buildNav(site) {
-  document.title = site.name + ' — Free Scripts Hub';
-}
-
-/* ── Build partner cards ── */
+/* ══════════════════════════════════════════════
+   BUILD PARTNERS
+══════════════════════════════════════════════ */
 function buildPartners(partners) {
   const grid = document.getElementById('partners-grid');
-  if (!grid) return;
-  grid.innerHTML = partners.map(p => `
-    <a class="partner-card" href="${p.url}" target="_blank" rel="noopener">
+  if (!grid || !partners.length) return;
+
+  const html = partners.map(p => `
+    <a class="partner-card" href="${safe(p.url)}" target="_blank" rel="noopener">
       <div class="partner-top">
         <div class="partner-logo-wrap">
           <img
             class="partner-logo"
-            src="${p.logo}"
-            alt="${p.name}"
+            src="${safe(p.logo)}"
+            alt="${safe(p.name)}"
             onerror="this.style.display='none'"
           />
           <div class="partner-name-wrap">
-            <div class="partner-name">${p.name}</div>
-            <div class="partner-tagline">${p.tagline}</div>
+            <div class="partner-name">${safe(p.name)}</div>
+            <div class="partner-tagline">${safe(p.tagline)}</div>
           </div>
         </div>
-        <div class="partner-badge" style="color:${p.badgeColor};border-color:${p.badgeColor};background:${p.badgeColor}18;">
-          ${p.badge}
+        <div
+          class="partner-badge"
+          style="color:${safe(p.badgeColor)};border-color:${safe(p.badgeColor)};background:${safe(p.badgeColor)}18;"
+        >
+          ${safe(p.badge)}
         </div>
       </div>
-      <div class="partner-desc">${p.description}</div>
+      <div class="partner-desc">${safe(p.description)}</div>
       <div class="partner-platforms">
-        ${p.platforms.map(pl => `<span class="partner-platform">${pl}</span>`).join('')}
+        ${(p.platforms || []).map(pl => `<span class="partner-platform">${safe(pl)}</span>`).join('')}
       </div>
       <div class="partner-footer">
-        <span class="partner-highlight">${p.highlight}</span>
-        <span class="partner-visit">Visit ${p.name} →</span>
+        <span class="partner-highlight">${safe(p.highlight)}</span>
+        <span class="partner-visit">Visit ${safe(p.name)} →</span>
       </div>
     </a>
   `).join('');
+
+  grid.innerHTML = html;
 }
 
-/* ── Build ad banners ── */
+/* ══════════════════════════════════════════════
+   BUILD BANNERS
+══════════════════════════════════════════════ */
 function buildBanners(banners) {
+  const positionMap = {
+    'hero-bottom': 'slot-hero',
+    'mid-content': 'slot-mid',
+    'sidebar':     'slot-sidebar',
+    'pre-footer':  'slot-footer',
+  };
+
   banners.forEach(b => {
-    if (b.position === 'hero-bottom') {
-      const slot = document.getElementById('slot-hero');
-      if (slot) slot.innerHTML = wideBanner(b);
-    }
-    if (b.position === 'mid-content') {
-      const slot = document.getElementById('slot-mid');
-      if (slot) slot.innerHTML = wideBanner(b);
-    }
-    if (b.position === 'sidebar') {
-      const slot = document.getElementById('slot-sidebar');
-      if (slot) slot.innerHTML = boxBanner(b);
-    }
-    if (b.position === 'pre-footer') {
-      const slot = document.getElementById('slot-footer');
-      if (slot) slot.innerHTML = wideBanner(b);
-    }
+    const slotId = positionMap[b.position];
+    if (!slotId) return;
+    const slot = document.getElementById(slotId);
+    if (!slot) return;
+    slot.innerHTML = b.position === 'sidebar' ? boxBanner(b) : wideBanner(b);
   });
 }
 
 function wideBanner(b) {
   return `
     <a class="ad-banner" href="ad-form.html">
-      <span class="ad-label">${b.label}</span>
+      <span class="ad-label">${safe(b.label)}</span>
       <div class="ad-text">
-        <span class="ad-cta">${b.cta}</span>
-        <span class="ad-sub">${b.subtext}</span>
+        <span class="ad-cta">${safe(b.cta)}</span>
+        <span class="ad-sub">${safe(b.subtext)}</span>
       </div>
       <span class="ad-arrow">→</span>
     </a>
@@ -111,77 +149,107 @@ function wideBanner(b) {
 function boxBanner(b) {
   return `
     <a class="ad-banner-box" href="ad-form.html">
-      <span class="ad-label">${b.label}</span>
-      <span class="ad-cta">${b.cta}</span>
-      <span class="ad-sub">${b.subtext}</span>
+      <span class="ad-label">${safe(b.label)}</span>
+      <span class="ad-cta">${safe(b.cta)}</span>
+      <span class="ad-sub">${safe(b.subtext)}</span>
       <span class="ad-arrow">→</span>
     </a>
   `;
 }
 
-/* ── Build category tabs ── */
+/* ══════════════════════════════════════════════
+   BUILD CATEGORIES
+══════════════════════════════════════════════ */
 function buildCategories(categories) {
   const tabs = document.getElementById('cat-tabs');
-  if (!tabs) return;
+  if (!tabs || !categories.length) return;
+
   tabs.innerHTML = categories.map(c => `
-    <button class="cat-tab ${c.id === 'all' ? 'active' : ''}" data-cat="${c.id}">
-      <span>${c.icon}</span>
-      <span>${c.name}</span>
+    <button
+      class="cat-tab ${c.id === 'all' ? 'active' : ''}"
+      data-cat="${safe(c.id)}"
+    >
+      <span>${safe(c.icon)}</span>
+      <span>${safe(c.name)}</span>
     </button>
   `).join('');
 }
 
-/* ── Build sidebar stats ── */
+/* ══════════════════════════════════════════════
+   BUILD SIDEBAR STATS
+══════════════════════════════════════════════ */
 function buildSidebarStats(scripts) {
   const card = document.getElementById('sidebar-stats');
   if (!card) return;
+
   const totalDownloads = scripts.reduce((a, s) => a + (s.downloads || 0), 0);
   const totalScripts   = scripts.length;
-  const games = [...new Set(scripts.map(s => s.game))].length;
+  const games          = new Set(scripts.map(s => s.game)).size;
+
   card.innerHTML = `
     <h3>📊 Site Stats</h3>
-    <div class="sidebar-stat-row"><span>Total Scripts</span><span>${totalScripts}</span></div>
-    <div class="sidebar-stat-row"><span>Total Downloads</span><span>${formatNum(totalDownloads)}</span></div>
-    <div class="sidebar-stat-row"><span>Games Covered</span><span>${games}</span></div>
-    <div class="sidebar-stat-row"><span>Always Free</span><span>✅</span></div>
+    <div class="sidebar-stat-row">
+      <span>Total Scripts</span>
+      <span>${totalScripts}</span>
+    </div>
+    <div class="sidebar-stat-row">
+      <span>Total Downloads</span>
+      <span>${formatNum(totalDownloads)}</span>
+    </div>
+    <div class="sidebar-stat-row">
+      <span>Games Covered</span>
+      <span>${games}</span>
+    </div>
+    <div class="sidebar-stat-row">
+      <span>Always Free</span>
+      <span>✅</span>
+    </div>
   `;
 }
 
-/* ── Apply all filters and render ── */
+/* ══════════════════════════════════════════════
+   APPLY FILTERS — optimized
+══════════════════════════════════════════════ */
 function applyFilters() {
   let results = [...allScripts];
 
+  /* Category filter */
   if (activeCategory !== 'all') {
     results = results.filter(s => s.category === activeCategory);
   }
 
+  /* Tag filter */
   if (activeTag !== 'all') {
-    results = results.filter(s => s.tags && s.tags.includes(activeTag));
+    results = results.filter(s => Array.isArray(s.tags) && s.tags.includes(activeTag));
   }
 
-  if (searchQuery.trim() !== '') {
-    const q = searchQuery.toLowerCase();
+  /* Search filter */
+  const q = searchQuery.trim().toLowerCase();
+  if (q !== '') {
     results = results.filter(s =>
-      s.name.toLowerCase().includes(q) ||
-      s.game.toLowerCase().includes(q) ||
-      s.description.toLowerCase().includes(q)
+      (s.name        || '').toLowerCase().includes(q) ||
+      (s.game        || '').toLowerCase().includes(q) ||
+      (s.description || '').toLowerCase().includes(q)
     );
   }
 
+  /* Sort — optimized */
   if (sortMode === 'popular') {
     results.sort((a, b) => (b.downloads || 0) - (a.downloads || 0));
   } else if (sortMode === 'newest') {
-    results.sort((a, b) => allScripts.indexOf(a) - allScripts.indexOf(b));
+    results.reverse();
   } else if (sortMode === 'az') {
-    results.sort((a, b) => a.name.localeCompare(b.name));
+    results.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
   }
 
   filtered = results;
-  page = 1;
+  page     = 1;
   renderScripts();
 }
 
-/* ── Render script cards ── */
+/* ══════════════════════════════════════════════
+   RENDER SCRIPTS — uses DocumentFragment
+══════════════════════════════════════════════ */
 function renderScripts() {
   const grid      = document.getElementById('scripts-grid');
   const noResults = document.getElementById('no-results');
@@ -190,100 +258,108 @@ function renderScripts() {
 
   if (!grid) return;
 
+  /* No results */
   if (filtered.length === 0) {
     grid.innerHTML = '';
-    noResults.classList.remove('hidden');
-    loadWrap.classList.add('hidden');
-    if (countEl) countEl.textContent = '0 scripts found';
+    if (noResults) noResults.classList.remove('hidden');
+    if (loadWrap)  loadWrap.classList.add('hidden');
+    if (countEl)   countEl.textContent = '0 scripts found';
     return;
   }
 
-  noResults.classList.add('hidden');
+  if (noResults) noResults.classList.add('hidden');
 
   const slice = filtered.slice(0, page * PAGE_SIZE);
-  grid.innerHTML = slice.map(s => scriptCard(s)).join('');
 
+  /* Build using DocumentFragment for performance */
+  const fragment = document.createDocumentFragment();
+  slice.forEach((s, i) => {
+    const div = document.createElement('div');
+    div.innerHTML = scriptCard(s);
+    const card = div.firstElementChild;
+
+    /* Click card to open modal */
+    card.addEventListener('click', e => {
+      if (e.target.classList.contains('script-dl-btn')) return;
+      openModal(s);
+    });
+
+    /* Download button */
+    const dlBtn = card.querySelector('.script-dl-btn');
+    if (dlBtn) {
+      dlBtn.addEventListener('click', e => {
+        e.stopPropagation();
+        handleDownload(s.downloadUrl);
+      });
+    }
+
+    fragment.appendChild(card);
+  });
+
+  grid.innerHTML = '';
+  grid.appendChild(fragment);
+
+  /* Update count */
   if (countEl) {
     countEl.textContent = `${filtered.length} script${filtered.length !== 1 ? 's' : ''} found`;
   }
 
-  if (slice.length < filtered.length) {
-    loadWrap.classList.remove('hidden');
-  } else {
-    loadWrap.classList.add('hidden');
+  /* Load more button */
+  if (loadWrap) {
+    if (slice.length < filtered.length) {
+      loadWrap.classList.remove('hidden');
+    } else {
+      loadWrap.classList.add('hidden');
+    }
   }
-
-  grid.querySelectorAll('.script-card').forEach((card, i) => {
-    card.addEventListener('click', (e) => {
-      if (e.target.classList.contains('script-dl-btn')) return;
-      openModal(slice[i]);
-    });
-  });
 }
 
-/* ── Script card HTML ── */
+/* ══════════════════════════════════════════════
+   SCRIPT CARD HTML
+══════════════════════════════════════════════ */
 function scriptCard(s) {
-  const tags = (s.tags || []).map(t => {
-    if (t === 'new')         return `<span class="tag tag-new-pill">🟢 New</span>`;
-    if (t === 'popular')     return `<span class="tag tag-pop-pill">🔥 Popular</span>`;
-    if (t === 'recommended') return `<span class="tag tag-rec-pill">⭐ Recommended</span>`;
-    return '';
-  }).join('');
-
-  const features = (s.features || []).slice(0, 3).map(f =>
-    `<span class="feature-pill">${f}</span>`
-  ).join('');
+  const tags     = buildTags(s.tags);
+  const features = buildFeaturePills(s.features, 3);
 
   return `
     <div class="script-card">
       <div class="script-card-top">
         <div>
-          <div class="script-game">${s.game}</div>
-          <div class="script-name">${s.name}</div>
+          <div class="script-game">${safe(s.game)}</div>
+          <div class="script-name">${safe(s.name)}</div>
         </div>
-        <span class="script-version">${s.version || ''}</span>
+        ${s.version ? `<span class="script-version">${safe(s.version)}</span>` : ''}
       </div>
-      <div class="script-desc">${s.description}</div>
-      ${tags ? `<div class="script-tags">${tags}</div>` : ''}
+      <div class="script-desc">${safe(s.description)}</div>
+      ${tags     ? `<div class="script-tags">${tags}</div>`         : ''}
       ${features ? `<div class="script-features">${features}</div>` : ''}
       <div class="script-footer">
         <span class="script-downloads">⬇️ ${formatNum(s.downloads || 0)}</span>
-        <button class="script-dl-btn" onclick="handleDownload('${s.downloadUrl}', '${s.name.replace(/'/g, "\\'")}')">
-          Download
-        </button>
+        <button class="script-dl-btn">Download</button>
       </div>
     </div>
   `;
 }
 
-/* ── Open modal ── */
+/* ══════════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════════ */
 function openModal(s) {
   const overlay = document.getElementById('modal-overlay');
   const body    = document.getElementById('modal-body');
   if (!overlay || !body) return;
 
-  const tags = (s.tags || []).map(t => {
-    if (t === 'new')         return `<span class="tag tag-new-pill">🟢 New</span>`;
-    if (t === 'popular')     return `<span class="tag tag-pop-pill">🔥 Popular</span>`;
-    if (t === 'recommended') return `<span class="tag tag-rec-pill">⭐ Recommended</span>`;
-    return '';
-  }).join('');
-
-  const features = (s.features || []).map(f =>
-    `<span class="modal-feature">${f}</span>`
-  ).join('');
-
-  const executors = (s.executor || []).map(e =>
-    `<span class="modal-executor">${e}</span>`
-  ).join('');
+  const tags      = buildTags(s.tags);
+  const features  = buildFeaturePills(s.features);
+  const executors = buildExecutorPills(s.executor);
 
   body.innerHTML = `
-    <div class="modal-game">${s.game}</div>
-    <div class="modal-name">${s.name}</div>
-    <div class="modal-version">Version: ${s.version || 'N/A'}</div>
-    ${tags ? `<div class="modal-tags">${tags}</div>` : ''}
-    <div class="modal-desc">${s.description}</div>
-    ${features ? `
+    <div class="modal-game">${safe(s.game)}</div>
+    <div class="modal-name">${safe(s.name)}</div>
+    ${s.version ? `<div class="modal-version">Version: ${safe(s.version)}</div>` : ''}
+    ${tags      ? `<div class="modal-tags">${tags}</div>`                         : ''}
+    <div class="modal-desc">${safe(s.description)}</div>
+    ${features  ? `
       <div class="modal-section-title">Features</div>
       <div class="modal-features">${features}</div>
     ` : ''}
@@ -292,7 +368,11 @@ function openModal(s) {
       <div class="modal-executors">${executors}</div>
     ` : ''}
     <div class="modal-downloads">⬇️ ${formatNum(s.downloads || 0)} downloads</div>
-    <a class="modal-dl-btn" href="${s.downloadUrl}" ${s.downloadUrl !== '#' ? 'target="_blank" rel="noopener"' : ''}>
+    <a
+      class="modal-dl-btn"
+      href="${safe(s.downloadUrl)}"
+      ${s.downloadUrl && s.downloadUrl !== '#' ? 'target="_blank" rel="noopener"' : ''}
+    >
       ⬇️ Download Script
     </a>
   `;
@@ -301,31 +381,75 @@ function openModal(s) {
   document.body.style.overflow = 'hidden';
 }
 
-/* ── Close modal ── */
 function closeModal() {
   const overlay = document.getElementById('modal-overlay');
   if (overlay) overlay.classList.add('hidden');
   document.body.style.overflow = '';
 }
 
-/* ── Handle download ── */
-function handleDownload(url, name) {
+/* ══════════════════════════════════════════════
+   HANDLE DOWNLOAD
+══════════════════════════════════════════════ */
+function handleDownload(url) {
   if (url && url !== '#') {
     window.open(url, '_blank', 'noopener');
   }
 }
 
-/* ── Format numbers ── */
+/* ══════════════════════════════════════════════
+   HELPER — build tag pills
+══════════════════════════════════════════════ */
+function buildTags(tags) {
+  if (!Array.isArray(tags) || tags.length === 0) return '';
+  return tags.map(t => {
+    if (t === 'new')         return `<span class="tag tag-new-pill">🟢 New</span>`;
+    if    (t === 'popular')     return `<span class="tag tag-pop-pill">🔥 Popular</span>`;
+    if (t === 'recommended') return `<span class="tag tag-rec-pill">⭐ Recommended</span>`;
+    return '';
+  }).join('');
+}
+
+/* ══════════════════════════════════════════════
+   HELPER — build feature pills
+══════════════════════════════════════════════ */
+function buildFeaturePills(features, limit) {
+  if (!Array.isArray(features) || features.length === 0) return '';
+  const list = limit ? features.slice(0, limit) : features;
+  return list.map(f => `<span class="feature-pill">${safe(f)}</span>`).join('');
+}
+
+/* ══════════════════════════════════════════════
+   HELPER — build executor pills
+══════════════════════════════════════════════ */
+function buildExecutorPills(executors) {
+  if (!Array.isArray(executors) || executors.length === 0) return '';
+  return executors.map(e => `<span class="modal-executor">${safe(e)}</span>`).join('');
+}
+
+/* ══════════════════════════════════════════════
+   HELPER — safe string (prevent undefined/null in UI)
+══════════════════════════════════════════════ */
+function safe(val) {
+  if (val === null || val === undefined) return '';
+  return String(val);
+}
+
+/* ══════════════════════════════════════════════
+   HELPER — format numbers
+══════════════════════════════════════════════ */
 function formatNum(n) {
+  if (!n || isNaN(n)) return '0';
   if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
   if (n >= 1000)    return (n / 1000).toFixed(1) + 'K';
   return n.toString();
 }
 
-/* ── Bind all events ── */
+/* ══════════════════════════════════════════════
+   BIND EVENTS
+══════════════════════════════════════════════ */
 function bindEvents() {
 
-  /* Hamburger */
+  /* ── Hamburger ── */
   const hamburger  = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   if (hamburger && mobileMenu) {
@@ -335,27 +459,33 @@ function bindEvents() {
     });
   }
 
-  /* Search input */
+  /* ── Search with debounce ── */
   const searchInput = document.getElementById('search');
   const clearBtn    = document.getElementById('search-clear');
+
   if (searchInput) {
     searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
       searchQuery = searchInput.value;
-      clearBtn.style.display = searchQuery ? 'block' : 'none';
-      applyFilters();
+      if (clearBtn) clearBtn.style.display = searchQuery ? 'block' : 'none';
+      searchTimeout = setTimeout(() => {
+        applyFilters();
+      }, 250);
     });
   }
+
   if (clearBtn) {
     clearBtn.style.display = 'none';
     clearBtn.addEventListener('click', () => {
-      searchInput.value = '';
+      if (searchInput) searchInput.value = '';
       searchQuery = '';
       clearBtn.style.display = 'none';
+      clearTimeout(searchTimeout);
       applyFilters();
     });
   }
 
-  /* Sort */
+  /* ── Sort ── */
   const sortEl = document.getElementById('sort');
   if (sortEl) {
     sortEl.addEventListener('change', () => {
@@ -364,37 +494,51 @@ function bindEvents() {
     });
   }
 
-  /* Category tabs */
-  document.addEventListener('click', e => {
-    if (e.target.closest('.cat-tab')) {
+  /* ── Category tabs ── */
+  const catTabs = document.getElementById('cat-tabs');
+  if (catTabs) {
+    catTabs.addEventListener('click', e => {
       const tab = e.target.closest('.cat-tab');
+      if (!tab) return;
       document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       activeCategory = tab.dataset.cat;
       applyFilters();
-    }
-  });
+    });
+  }
 
-  /* Tag filters */
-  document.querySelectorAll('.tag-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+  /* ── Tag filter buttons ── */
+  const tagRow = document.getElementById('tag-filters') || document.querySelector('.tag-row');
+  if (tagRow) {
+    tagRow.addEventListener('click', e => {
+      const btn = e.target.closest('.tag-btn');
+      if (!btn) return;
       document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeTag = btn.dataset.tag;
       applyFilters();
     });
-  });
+  }
 
-  /* Load more */
+  /* ── Load more ── */
   const loadMoreBtn = document.getElementById('load-more');
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
       page++;
       renderScripts();
+      /* Scroll to where new cards start */
+      const grid = document.getElementById('scripts-grid');
+      if (grid) {
+        const cards = grid.querySelectorAll('.script-card');
+        const firstNew = cards[(page - 1) * PAGE_SIZE];
+        if (firstNew) {
+          firstNew.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     });
   }
 
-  /* Clear all filters */
+  /* ── Clear all filters ── */
   const clearAll = document.getElementById('clear-all');
   if (clearAll) {
     clearAll.addEventListener('click', () => {
@@ -402,28 +546,46 @@ function bindEvents() {
       activeCategory = 'all';
       activeTag      = 'all';
       sortMode       = 'popular';
+
       const searchInput = document.getElementById('search');
       if (searchInput) searchInput.value = '';
+
       const clearBtn = document.getElementById('search-clear');
       if (clearBtn) clearBtn.style.display = 'none';
+
+      const sortEl = document.getElementById('sort');
+      if (sortEl) sortEl.value = 'popular';
+
       document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
       const allTab = document.querySelector('.cat-tab[data-cat="all"]');
       if (allTab) allTab.classList.add('active');
+
       document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
       const allTag = document.querySelector('.tag-btn[data-tag="all"]');
       if (allTag) allTag.classList.add('active');
+
+      clearTimeout(searchTimeout);
       applyFilters();
     });
   }
 
-  /* Modal close button */
+  /* ── Modal close button ── */
   const modalClose = document.getElementById('modal-close');
-  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+  }
 
-  /* Modal overlay click outside */
+  /* ── Modal overlay click outside ── */
   const modalOverlay = document.getElementById('modal-overlay');
   if (modalOverlay) {
     modalOverlay.addEventListener('click', e => {
       if (e.target === modalOverlay) closeModal();
     });
   }
+
+  /* ── Escape key closes modal ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+}
