@@ -1,38 +1,114 @@
-<!-- Only the main grid section and JS updates are shown for brevity -->
-<div class="max-w-7xl mx-auto px-6">
-  <!-- Trending / Popular Scripts -->
-  <h2 class="text-2xl font-semibold mb-4">Popular Scripts</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10" id="popular-scripts"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZenScripts Hub</title>
+<style>
+  body { background: #070707; color: white; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+  a { text-decoration: none; }
+  h1, h2 { margin: 0; }
 
-  <!-- All Scripts Grid -->
-  <h2 class="text-2xl font-semibold mb-4">All Scripts</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-16" id="scripts-grid"></div>
+  /* NAVBAR */
+  .navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: #070707; border-bottom: 1px solid #1a1a1a; position: sticky; top: 0; z-index: 50; }
+  .navbar button { margin-left: 10px; padding: 8px 15px; border: 1px solid #2a2a2a; border-radius: 6px; background: transparent; color: white; cursor: pointer; }
+  .navbar button:hover { background: #111; }
+
+  /* HERO */
+  .hero { padding: 40px 30px; text-align: center; }
+  .hero h1 { font-size: 48px; }
+  .hero p { color: #aaa; margin-top: 10px; }
+  .hero .cta-btn { margin-top: 20px; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; }
+  .cta-white { background: white; color: black; border: none; }
+  .cta-yellow { background: #f0c000; color: black; border: none; }
+
+  /* SEARCH */
+  #search { width: 100%; padding: 12px; margin: 20px auto; display: block; background: #111; border: none; color: white; border-radius: 6px; font-size: 16px; }
+
+  /* GRID */
+  .grid { display: grid; gap: 20px; margin: 30px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .card { background: #111; padding: 20px; border-radius: 12px; border: 1px solid #1f1f1f; transition: transform 0.2s, box-shadow 0.2s; position: relative; }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 0 15px rgba(255,255,255,0.15); }
+  .card h3 { font-size: 18px; margin-bottom: 5px; }
+  .card p { font-size: 14px; color: #aaa; margin-bottom: 10px; }
+  .btn { display: block; text-align: center; padding: 10px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+  .download { background: white; color: black; }
+  .premium { background: gold; color: black; }
+
+  /* TOOLTIP */
+  .btn[title]:hover::after { content: attr(title); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #222; color: white; padding: 5px 10px; border-radius: 4px; white-space: nowrap; font-size: 12px; margin-bottom: 5px; }
+
+  /* BANNERS */
+  .banner { display: flex; gap: 15px; margin: 30px; flex-wrap: wrap; }
+  .banner div { flex: 1 1 200px; background: #1a1a1a; border-radius: 10px; overflow: hidden; cursor: pointer; position: relative; }
+  .banner img, .banner video { width: 100%; display: block; }
+  .banner .label { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.5); color: white; padding: 3px 6px; border-radius: 4px; font-size: 12px; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 20px; border-top: 1px solid #1a1a1a; color: #777; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <h2>ZenScripts</h2>
+  <div>
+    <button onclick="window.open('https://discord.gg/YOURDISCORD')">Discord</button>
+    <button onclick="window.open('https://zenscripts.pro')">Premium Scripts</button>
+    <button onclick="window.open('https://cheapsmm.lol')">SMM Panel</button>
+  </div>
 </div>
 
-<script>
-const allScripts = INITIAL_SCRIPTS; // your 5000 scripts array
+<!-- HERO -->
+<div class="hero">
+  <h1>5000+ Scripts Hub</h1>
+  <p>Trusted by 300+ buyers • Free & Premium Builds</p>
+  <button class="cta-white" onclick="document.getElementById('search').focus()">Browse Scripts</button>
+</div>
 
-// Sort top 10 popular scripts (for example, by price or some fake popularity score)
-const popularScripts = allScripts.slice(0, 10);
+<!-- BANNERS -->
+<div class="banner" id="banner-section">
+  <!-- Example banners: replace src and link -->
+  <div onclick="window.open('https://cheapsmm.lol')"><img src="https://via.placeholder.com/400x150?text=Banner+1"><div class="label">Banner 1</div></div>
+  <div onclick="window.open('https://zenscripts.pro')"><img src="https://via.placeholder.com/400x150?text=Banner+2"><div class="label">Banner 2</div></div>
+</div>
+
+<!-- SEARCH -->
+<input type="text" id="search" placeholder="Search 5000+ scripts...">
+
+<!-- POPULAR SCRIPTS -->
+<h2 style="margin-left:30px;">Popular Scripts</h2>
+<div class="grid" id="popular-scripts"></div>
+
+<!-- ALL SCRIPTS -->
+<h2 style="margin-left:30px;">All Scripts</h2>
+<div class="grid" id="scripts-grid"></div>
+
+<!-- FOOTER -->
+<footer>© 2026 ZenScripts. All rights reserved.</footer>
+
+<script>
+const INITIAL_SCRIPTS = [
+  {"name":"Rust Anti-Recoil V2","category":"Rust","price":0,"file":"/files/rust_v2.gpc","description":"Standard recoil compensation for all major Rust configurations."},
+  {"name":"Premium Apex Pack","category":"Apex","price":15.00,"sellhubId":"https://sellhub.io/p/your-id","description":"The ultimate Apex suite. Includes private bypass and sticky aim logic."}
+  // add other scripts here
+];
+
+// Popular scripts example (top 10)
+const popularScripts = INITIAL_SCRIPTS.slice(0,10);
 
 function createCard(script) {
   const div = document.createElement('div');
-  div.className = 'card group';
-  div.style.transition = 'transform 0.2s, box-shadow 0.2s';
-
-  // Hover effect
-  div.onmouseover = () => div.style.transform = 'translateY(-5px)';
-  div.onmouseout = () => div.style.transform = 'translateY(0px)';
+  div.className = 'card';
 
   const isPaid = script.price > 0;
   const link = isPaid ? script.sellhubId : script.file;
-  const tooltipText = isPaid 
-    ? 'Want full features? Visit zenscripts.pro' 
-    : 'Join our Discord for more free scripts & support!';
+  const tooltipText = isPaid ? 'Want full features? Visit zenscripts.pro' : 'Join our Discord for more free scripts & support!';
 
   div.innerHTML = `
     <h3>${script.name}</h3>
-    <p class="text-gray-400">${script.category} • ${isPaid ? 'Premium' : 'Free'}</p>
+    <p>${script.category} • ${isPaid ? 'Premium' : 'Free'}</p>
     <a href="${link}" ${!isPaid ? 'download' : ''} class="btn ${isPaid ? 'premium' : 'download'}" title="${tooltipText}">
       ${isPaid ? 'Buy Premium' : 'Download'}
     </a>
@@ -43,24 +119,19 @@ function createCard(script) {
 function displayScripts(containerId, scriptsArray) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
-  scriptsArray.forEach(script => container.appendChild(createCard(script)));
+  scriptsArray.forEach(script => container.appendChild(createCard(script));
 }
 
 // Initial load
 displayScripts('popular-scripts', popularScripts);
-displayScripts('scripts-grid', allScripts);
+displayScripts('scripts-grid', INITIAL_SCRIPTS);
 
-// Search function
+// Search functionality
 document.getElementById('search').addEventListener('input', (e) => {
   const value = e.target.value.toLowerCase();
-  const filtered = allScripts.filter(s => s.name.toLowerCase().includes(value));
+  const filtered = INITIAL_SCRIPTS.filter(s => s.name.toLowerCase().includes(value));
   displayScripts('scripts-grid', filtered);
 });
 </script>
-
-<style>
-/* Minimalist hover glow */
-.card:hover {
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-}
-</style>
+</body>
+</html>
