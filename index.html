@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ZenScripts — Free Scripts Hub</title>
-  <meta name="description" content="Browse and download 500+ free scripts for Rust, R6 Siege, COD, Minecraft, Valorant and more." />
+  <meta name="description" content="Browse and download free scripts for Rust, R6 Siege, COD, Minecraft, Valorant and more." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
@@ -33,6 +34,7 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <header class="hero">
     <div class="hero-bg">
       <div class="orb orb-1"></div>
@@ -55,22 +57,29 @@
         <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">Games</span></div>
       </div>
     </div>
-    <div class="hero-banner-slot" id="slot-hero"></div>
+    <!-- HERO BANNER SLOT -->
+    <div class="hero-banner-slot">
+      <div id="slot-hero"></div>
+    </div>
   </header>
 
+  <!-- PARTNERS -->
   <section class="partners-section" id="partners">
     <div class="container">
       <div class="section-header">
         <h2>Our Partners</h2>
         <p>Trusted services we personally recommend</p>
       </div>
+      <!-- THIS ID MUST MATCH app.js: partners-grid -->
       <div class="partners-grid" id="partners-grid"></div>
     </div>
   </section>
 
+  <!-- SCRIPTS -->
   <section class="scripts-section" id="scripts">
     <div class="container">
 
+      <!-- CONTROLS -->
       <div class="controls">
         <div class="controls-left">
           <h2>Free Scripts</h2>
@@ -79,9 +88,12 @@
         <div class="controls-right">
           <div class="search-box">
             <span>🔍</span>
+            <!-- THIS ID MUST MATCH app.js: search -->
             <input type="text" id="search" placeholder="Search scripts or games..." autocomplete="off" />
+            <!-- THIS ID MUST MATCH app.js: search-clear -->
             <button id="search-clear" class="clear-btn">✕</button>
           </div>
+          <!-- THIS ID MUST MATCH app.js: sort -->
           <select id="sort" class="sort-select">
             <option value="popular">Most Popular</option>
             <option value="newest">Newest</option>
@@ -90,10 +102,14 @@
         </div>
       </div>
 
+      <!-- CATEGORY TABS -->
       <div class="cat-tabs-wrap">
+        <!-- THIS ID MUST MATCH app.js: cat-tabs -->
         <div class="cat-tabs" id="cat-tabs"></div>
       </div>
 
+      <!-- TAG FILTERS -->
+      <!-- THIS CLASS MUST MATCH app.js: .tag-row -->
       <div class="tag-row">
         <span class="tag-label">Filter:</span>
         <button class="tag-btn active" data-tag="all">All</button>
@@ -102,32 +118,58 @@
         <button class="tag-btn tag-rec" data-tag="recommended">⭐ Recommended</button>
       </div>
 
+      <!-- SCRIPTS LAYOUT -->
       <div class="scripts-layout">
+
+        <!-- GRID -->
         <div class="scripts-main">
+          <!-- THIS ID MUST MATCH app.js: scripts-grid -->
           <div class="scripts-grid" id="scripts-grid"></div>
+
+          <!-- NO RESULTS -->
+          <!-- THIS ID MUST MATCH app.js: no-results -->
           <div class="no-results hidden" id="no-results">
             <div class="no-results-icon">🔍</div>
             <h3>No scripts found</h3>
             <p>Try a different search or category.</p>
+            <!-- THIS ID MUST MATCH app.js: clear-all -->
             <button class="btn btn-ghost" id="clear-all">Clear Filters</button>
           </div>
+
+          <!-- LOAD MORE -->
+          <!-- THIS ID MUST MATCH app.js: load-more-wrap -->
           <div class="load-more-wrap hidden" id="load-more-wrap">
-            <button class="btn btn-ghost" id="load-more">Load More</button>
+            <!-- THIS ID MUST MATCH app.js: load-more -->
+            <button class="btn btn-ghost" id="load-more">Load More Scripts</button>
           </div>
         </div>
+
+        <!-- SIDEBAR -->
         <aside class="scripts-sidebar">
+          <!-- THIS ID MUST MATCH app.js: slot-sidebar -->
           <div id="slot-sidebar"></div>
+          <!-- THIS ID MUST MATCH app.js: sidebar-stats -->
           <div class="sidebar-card" id="sidebar-stats"></div>
         </aside>
+
       </div>
 
-      <div class="mid-banner-wrap" id="slot-mid"></div>
+      <!-- MID BANNER -->
+      <!-- THIS ID MUST MATCH app.js: slot-mid -->
+      <div id="slot-mid"></div>
 
     </div>
   </section>
 
-  <div class="footer-banner-wrap" id="slot-footer"></div>
+  <!-- FOOTER BANNER -->
+  <!-- THIS ID MUST MATCH app.js: slot-footer -->
+  <div class="footer-banner-wrap">
+    <div class="container">
+      <div id="slot-footer"></div>
+    </div>
+  </div>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-top">
@@ -159,9 +201,13 @@
     </div>
   </footer>
 
+  <!-- MODAL -->
+  <!-- THIS ID MUST MATCH app.js: modal-overlay -->
   <div class="modal-overlay hidden" id="modal-overlay">
     <div class="modal" id="modal">
+      <!-- THIS ID MUST MATCH app.js: modal-close -->
       <button class="modal-close" id="modal-close">✕</button>
+      <!-- THIS ID MUST MATCH app.js: modal-body -->
       <div class="modal-body" id="modal-body"></div>
     </div>
   </div>
