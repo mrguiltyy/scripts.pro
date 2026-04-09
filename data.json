@@ -614,13 +614,13 @@
       "name": "Universal Rapid Fire",
       "game": "Universal",
       "category": "utility",
-      "description": "Rapid fire macro that works across all games. Converts any weapon to full auto.",
+      "description": "Rapid fire macro that works across all games...",
       "tags": ["popular"],
       "version": "v3.0.0",
       "executor": ["AutoHotkey", "Logitech GHub"],
       "downloads": 67400,
       "features": ["Any Game", "Configurable Rate", "Toggle", "Lightweight"],
       "downloadUrl": "#"
-          }
-  ]
-}
+    } // Closed the object properly
+  ] // Closed the scripts array
+} // Closed the main JSON object
