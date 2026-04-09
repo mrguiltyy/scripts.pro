@@ -458,11 +458,8 @@ img { max-width: 100%; display: block; }
 .footer-bottom p { font-size: 0.8rem; color: var(--muted); }
 .footer-disc { font-size: 0.75rem !important; }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .scripts-layout { grid-template-columns: 1fr; }
-  .scripts-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
-  .sidebar-card { flex: 1; min-width: 240px; }
+  .scripts-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 28px; }
 }
 @media (max-width: 768px) {
