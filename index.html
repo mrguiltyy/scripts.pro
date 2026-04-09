@@ -1,216 +1,312 @@
-<div class="bg-cover bg-center mx-auto w-full max-w-[1128px] px-4 !scroll-smooth relative">
-  {% if announcement.length > 1 %}
-  <div id="announcement-div"
-    class="fade-out fixed top-20 right-2 z-30 sm:max-w-sm max-w-[300px] rounded-xl border border-white/10 bg-[#0a0a0a]/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-md">
-    <div id="announcement-close-btn" class="absolute top-1 right-1 cursor-pointer">
-      <svg width="16" height="16" viewBox="0 0 24 24" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"
-        class="icon line-color">
-        <path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2" d="M19 19 5 5" />
-        <path data-name="primary"
-          style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2" d="M19 5 5 19" />
-      </svg>
-    </div>
-    <format-markdown content="{{ announcement | escape }}"></format-markdown>
-  </div>
-  {% endif %}
-  <slot data-id="1" class="min-h-[100px]">
-    <vertical-layout data-id="2a4a9a67-7276-4e3b-a150-1a03ab0fceed" data-slots="5"
-      style="gap: 24px; align-items: center; justify-content: start" data-spacing="36" data-align-items="center"
-      class="pt-4" data-justify-items="start">
-      {% render "indexPage/header"
-      , productsSold: productsSold
-      , averageRating: averageRating
-      , image: image
-      , backgroundImage: backgroundImage
-      , name: name %}
-      <!-- Featured Products -->
-      {% if isAnyProductFeatured %}
-      {% render "indexPage/featuredProducts"
-      , productsOrGroups: productsOrGroups %}
-      {%- endif %}
-      <!-- Our Products -->
-      <div class="w-full text-left mt-8 mb-1">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[--accent-color] mb-2">Catalog</p>
-        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white">Our products</h2>
-        <p class="mt-1 text-sm text-muted-foreground/70 max-w-xl">Browse everything in one place.</p>
-      </div>
-      <slot data-id="ccecc470-9d14-4065-8d11-7cb4df6110a3" class="w-full">
-        <div class="relative w-full">
-          {% assign arr = productsOrGroups %}
-          <div id="products" class="flex flex-row justify-start flex-wrap gap-5 md:gap-6 lg:gap-7 w-full">
-            {%- for product in arr %}
-            {% if product.isGroup == false %}
-            <!-- Product Card -->
-            {% render "indexPage/productCard"
-            , product: product %}
-
-            {% else %}
-            <!-- Grouped Product -->
-            {% render "indexPage/productGroupCard"
-            , product: product %}
-            {% endif %}
-            {%- endfor %}
-          </div>
-        </div>
-      </slot>
-
-      <!-- Our Bundles -->
-      {% if bundles.length > 0 %}
-      <div class="w-full text-left mt-10 mb-1">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[--accent-color] mb-2">Value</p>
-        <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white">Our bundles</h2>
-        <p class="mt-1 text-sm text-muted-foreground/70 max-w-xl">Save more when you buy together.</p>
-      </div>
-      <slot data-id="ccecc470-9d14-4065-8d11-7cb4df6110a3" class="w-full">
-        {% assign arr = bundles %}
-        <div id="bundles" class="flex flex-row justify-start flex-wrap gap-5 md:gap-6 lg:gap-7 w-full">
-          {%- for bundle in arr %}
-          <!-- Bundle Card -->
-          {% render "indexPage/bundleCard"
-          , bundle: bundle %}
-          {%- endfor %}
-        </div>
-      </slot>
-      {%- endif %}
-      <!-- Free scripts helper section (editable block for hub.zenscripts.pro) -->
-      <div class="w-full mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6">
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div>
-            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[--accent-color] mb-2">Free Script Hub</p>
-            <h3 class="text-xl md:text-2xl font-semibold text-white tracking-tight">500+ scripts and growing</h3>
-            <p class="mt-1 text-sm text-muted-foreground/75">
-              Edit each script's name, description, game, and links from your product data. Free items can use download links; paid items can use Sellhub product/cart buttons.
-            </p>
-          </div>
-          <a href="https://hub.zenscripts.pro" class="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium bg-[--accent-color] text-black hover:opacity-90 transition">
-            Open Hub
-          </a>
-        </div>
-      </div>
-
-      <!-- Banner ad placements -->
-      <div class="w-full mt-10">
-        <div class="mb-3">
-          <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[--accent-color] mb-2">Advertising</p>
-          <h3 class="text-xl md:text-2xl font-semibold text-white tracking-tight">Banner slots (8)</h3>
-          <p class="mt-1 text-sm text-muted-foreground/75">Click any slot to order your banner placement.</p>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <a href="/banner-order.html?slot=1" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 1</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=2" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 2</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=3" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 3</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=4" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 4</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=5" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 5</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=6" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 6</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=7" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 7</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-          <a href="/banner-order.html?slot=8" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[--accent-color]/70 hover:bg-white/[0.05] transition">
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[--accent-color]">Banner 8</span>
-            <span class="mt-2 text-white font-semibold">Put your ad here</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Paid scripts / Sellhub helper buttons -->
-      <div class="w-full mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[--accent-color] mb-2">Premium Scripts</p>
-        <h3 class="text-xl md:text-2xl font-semibold text-white tracking-tight">Sellhub button area</h3>
-        <p class="mt-1 text-sm text-muted-foreground/75">
-          Use these buttons for paid products (replace IDs/URL as needed).
-        </p>
-        <div class="mt-4 flex flex-wrap gap-3">
-          <button
-            data-sellhub-product="4391e786-5038-4547-89d9-58c30f1c8957"
-            style="border-radius: 10px; background-color: #ffffff; color: #000000; padding: 5px 25px;">
-            Buy Variant
-          </button>
-          <button
-            data-sellhub-cart-product="4391e786-5038-4547-89d9-58c30f1c8957"
-            style="border-radius: 10px; background-color: #ffffff; color: #000000; padding: 5px 25px;">
-            Add to Cart
-          </button>
-          <button
-            data-sellhub-open-cart-store-url="https://pro-zen-scripts.sellhub.cx"
-            style="border-radius: 10px; background-color: #ffffff; color: #000000; padding: 5px 25px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-top:4px;margin-bottom:4px;"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- How it works -->
-      {% render "indexPage/howItWorks" %}
-      <!-- FAQ section -->
-      {% render "indexPage/faq" %}
-    </vertical-layout>
-  </slot>
-
-  <script key="indexPage-script">{% raw %}"use strict";(()=>{function setLayoutCartCount(cartCount){let cartCountSpan=document.getElementById("cart-count");cartCountSpan&&(cartCountSpan.innerText=cartCount.toString())}function withErrorHandling(fn){try{return fn()}catch(e){console.error(e)}}async function getCartData({localCartStorage}){return withErrorHandling(async()=>{let cartResponse=await fetch("/api/getCart",{method:"POST",body:JSON.stringify(localCartStorage)});if(!cartResponse.ok)throw new Error("Failed to fetch cart");return await cartResponse.json()})??{items:[],bundles:[]}}function addItemOrBundleToCartObject({params}){let prev={...localCart};return"item"in params?(console.log(prev.items),prev.items.find(item=>item.variant.id===params.item.variant.id)?"Item already in cart":{...prev,items:[...prev.items,{id:params.item.id,quantity:params.item.quantity,coupon:params.item.coupon,addons:params.item.addons,variant:{id:params.item.variant.id},payWhatYouWantAmount:params.item.payWhatYouWantAmount}]}):prev.bundles.find(item=>item.id===params.bundle.id)?"Bundle already in cart":{...prev,bundles:[...prev.bundles,{id:params.bundle.id,quantity:1,coupon:params.bundle.coupon}]}}async function canAddVariantToCart({variantId,quantity}){return withErrorHandling(async()=>{let canAddVariantJson=await(await fetch("/api/canAddVariantToCart",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({variantId,quantity})})).json();return console.log("canAddVariantJson",canAddVariantJson),Zod.z.object({result:Zod.z.object({success:Zod.z.literal(!0)}).or(Zod.z.object({success:Zod.z.literal(!1),error:Zod.z.string()}))}).parse(canAddVariantJson).result})??{success:!1,error:"Failed to check if variant can be added to cart"}}async function addItemOrBundleToCartObjectWithValidation({params}){if("item"in params){let newCartResult2=addItemOrBundleToCartObject({params});if(typeof newCartResult2=="string")return newCartResult2;let canAddVariantParsed=await canAddVariantToCart({variantId:params.item.variant.id,quantity:params.item.quantity});return canAddVariantParsed.success?newCartResult2:canAddVariantParsed.error}let newCartResult=addItemOrBundleToCartObject({params});if(typeof newCartResult=="string")return newCartResult;let bundleInNewCart=(await getCartData({localCartStorage:newCartResult})).bundles.find(bundle=>bundle.id===params.bundle.id);if(!bundleInNewCart)return"Failed to find bundle in new cart";let variantIdsInBundle=bundleInNewCart.variants.map(variant=>variant.id),errors=(await Promise.all(variantIdsInBundle.map(async variantId=>canAddVariantToCart({variantId,quantity:1})))).filter(response=>!response.success);return errors.length>0?errors.map(error=>"error"in error?error.error:null).filter(v=>v!==null).join(", "):newCartResult}async function addBundleToCart({bundle}){let newLocalCart=await addItemOrBundleToCartObjectWithValidation({params:{bundle}});return typeof newLocalCart=="string"?newLocalCart:(setLocalCart(newLocalCart),setLayoutCartCount(newLocalCart.bundles.length+newLocalCart.items.length),!0)}async function handleBundleAddToCartClick(card){let bundleIdInput=card.querySelector('input[name="bundleId"]'),couponInput=card.querySelector('input[name="coupon"]'),bundleId=bundleIdInput?.value.trim();if(!bundleId)return console.error("No bundle selected"),!1;let coupon=couponInput?.value.trim()||void 0;isAddingBundleToCart(card,!0);let addToCartResult=await addBundleToCart({bundle:{coupon,id:bundleId}});if(addToCartResult===!0){toast.success("Bundle added to cart"),isAddingBundleToCart(card,!1);return}toast.error(addToCartResult),isAddingBundleToCart(card,!1)}function isAddingBundleToCart(card,value){let bundleAddToCartButton=card.querySelector('button[id="bundle-add-to-cart"]');if(!bundleAddToCartButton){console.error("bundleAddToCartButton not found");return}let loadingSvg=document.createElement("div");loadingSvg.className="animate-spin h-[14px] w-[14px] border border-white/20 border-t-white border-t-2 rounded-full",loadingSvg.id="checkout-button-loading",value?(bundleAddToCartButton.innerHTML="",bundleAddToCartButton.appendChild(loadingSvg)):(bundleAddToCartButton.innerHTML="Add To Cart",document.getElementById("checkout-button-loading")?.remove())}function showDownloadThanksToast(){let existing=document.getElementById("download-thanks-toast");if(existing)return;let toast=document.createElement("div");toast.id="download-thanks-toast",toast.className="fixed bottom-4 right-4 z-50 max-w-sm rounded-xl border border-white/15 bg-[#0a0a0a]/95 p-4 text-sm shadow-2xl",toast.innerHTML='<div class="text-white font-semibold">Thanks for downloading!</div><div class="text-muted-foreground/80 mt-1">Join our Discord for support, help with values, and updates.</div><a href="https://discord.gg/" target="_blank" rel="noopener noreferrer" class="inline-flex mt-3 text-[--accent-color] hover:underline">Open Discord</a>',document.body.appendChild(toast),setTimeout(()=>{toast.remove()},6500)}async function entrypoint(){let announcementCloseBtn=document.getElementById("announcement-close-btn"),announcement=document.getElementById("announcement-div");announcementCloseBtn&&announcement&&announcementCloseBtn.addEventListener("click",()=>{announcement.style.display="none"}),document.body.addEventListener("click",async e=>{let htmlElement=e.target;if(htmlElement&&"id"in htmlElement&&htmlElement.id==="bundle-add-to-cart"){let card=htmlElement.closest('[action-name="checkout"]');if(!card)return;await handleBundleAddToCartClick(card)}if(htmlElement&&htmlElement.closest){let downloadTrigger=htmlElement.closest('[data-download-script="true"]');downloadTrigger&&showDownloadThanksToast()}})}entrypoint(/*!{% endraw %}*/decodeURIComponent(``)/*!{% raw %}*/);
-})();{% endraw %}</script>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenScripts - Game Script Store</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: '#7cf0ff',
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    .category-box {
-      border: 1px solid var(--color);
+    :root {
+      --accent-color: #7cf0ff;
+      --bg-color: #0a0a0a;
     }
-
-    .category-box .gradient {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      background: var(--color);
-      filter: blur(50px);
-      transition: all 0.25s ease-in-out;
-      transform: scale(1) translateY(55%);
-    }
-
-    .category-box:hover .gradient {
-      transform: scale(2) translateY(55%);
-    }
-
-    .products-filter-container {
-      gap: 2rem;
-    }
-
-    @media (min-width: 768px) {
-
-      .products-filter-container .product,
-      .products-filter-container .product .product-info {
-        flex-direction: row !important;
-      }
-
-      .products-filter-container .product .purchase {
-        display: inline-flex !important;
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .products-filter-container {
-        flex-direction: row !important;
-      }
-
-      .products-filter-container .filter {
-        width: 25% !important;
-      }
-    }
+    body { background: #07090f; color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
   </style>
-</div>
+</head>
+<body class="bg-[#07090f]">
+  <div class="bg-cover bg-center mx-auto w-full max-w-[1128px] px-4 scroll-smooth relative min-h-screen">
+    <!-- Announcement (static example) -->
+    <div id="announcement-div" class="fade-out fixed top-20 right-2 z-30 sm:max-w-sm max-w-[300px] rounded-xl border border-white/10 bg-[#0a0a0a]/95 p-4 shadow-2xl shadow-black/40 backdrop-blur-md hidden">
+      <div id="announcement-close-btn" class="absolute top-1 right-1 cursor-pointer">
+        <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon">
+          <path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2" d="M19 19 5 5"/>
+          <path style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-width:2" d="M19 5 5 19"/>
+        </svg>
+      </div>
+      <div class="text-sm">New Rust script released! Check catalog.</div>
+    </div>
+
+    <div id="main-content" class="pt-4"></div>
+  </div>
+
+  <script>
+    // Load products
+    async function loadProducts() {
+      try {
+        const response = await fetch('products.json');
+        return await response.json();
+      } catch (e) {
+        console.error('Failed to load products:', e);
+        return [];
+      }
+    }
+
+    // Render stars
+    function renderStars(rating) {
+      const maxStars = 5;
+      let html = '';
+      for (let i = 1; i <= maxStars; i++) {
+        const fill = rating >= i ? '#fbbf24' : rating > i - 1 ? 'url(#halfStar)' : 'rgba(255,255,255,0.2)';
+        html += `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" style="display:inline-block;">
+          <defs><linearGradient id="halfStar"><stop offset="50%" stop-color="#fbbf24"/><stop offset="50%" stop-color="rgba(255,255,255,0.2)"/></linearGradient></defs>
+          <path fill="${fill}" d="M12 .587l3.668 7.429L23 9.745l-5.5 5.385 1.3 7.58L12 18.897 5.2 22.71l1.3-7.58L1 9.745l7.332-1.729L12 .587z"/>
+        </svg>`;
+      }
+      return html;
+    }
+
+    // Product card component
+    function createProductCard(product) {
+      const isFree = product.price === 0;
+      const div = document.createElement('div');
+      div.className = 'flex flex-col w-full md:w-[calc(25%-1.75rem)] lg:w-[calc(20%-1.4rem)] min-w-0';
+      div.innerHTML = `
+        <div class="group rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 hover:border-[--accent-color]/50 hover:bg-white/[0.03] transition-all overflow-hidden h-full">
+          <div class="flex items-start justify-between mb-4">
+            <div class="flex items-center gap-3 text-xs uppercase tracking-[0.2em] font-semibold text-[--accent-color]">${product.category}</div>
+            ${isFree ? '<span class="px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-semibold">FREE</span>' : ''}
+          </div>
+          <h3 class="font-semibold text-lg tracking-tight text-white mb-3 line-clamp-2">${product.name}</h3>
+          <p class="text-sm text-muted-foreground/75 mb-6 line-clamp-3">${product.description}</p>
+          <div class="flex items-center justify-between mt-auto">
+            <div class="text-2xl font-bold text-white">${isFree ? 'Free' : '$' + product.price}</div>
+            <div class="flex gap-2">
+              ${isFree ? `<a href="${product.file}" download class="px-4 py-2 bg-green-600 text-white rounded-xl text-sm font-semibold hover:bg-green-700 transition">Download</a>` : ''}
+              ${product.sellhubId ? `<button data-sellhub-product="${product.sellhubId.split('/').pop()}" class="px-4 py-2 bg-[#7cf0ff] text-black rounded-xl text-sm font-semibold hover:opacity-90 transition">Buy</button>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    // Bundle card (simple)
+    function createBundleCard(bundle) {
+      const div = document.createElement('div');
+      div.className = 'flex flex-col w-full md:w-[calc(25%-1.75rem)] lg:w-[calc(20%-1.4rem)] min-w-0';
+      div.innerHTML = `
+        <div class="group rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 hover:border-[--accent-color]/50 hover:bg-white/[0.03] transition-all overflow-hidden h-full bg-gradient-to-br from-yellow-500/10 to-orange-500/10">
+          <div class="flex items-center gap-3 text-xs uppercase tracking-[0.2em] font-semibold text-yellow-400 mb-4">Bundle</div>
+          <h3 class="font-semibold text-lg tracking-tight text-white mb-3">${bundle.name}</h3>
+          <p class="text-sm text-muted-foreground/75 mb-6">${bundle.description}</p>
+          <div class="flex items-center justify-between mt-auto">
+            <div class="text-2xl font-bold text-white">$${bundle.price}</div>
+            <button id="bundle-add-to-cart" class="px-6 py-2 bg-yellow-500 text-black rounded-xl text-sm font-bold hover:bg-yellow-600 transition">Add Bundle</button>
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    // Main render
+    async function renderPage() {
+      const products = await loadProducts();
+      const featured = products.filter(p => p.featured).slice(0, 4);
+      const bundles = products.filter(p => p.isGroup);
+      const productsSold = products.length * 10; // Demo
+      const averageRating = 4.8;
+
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div style="gap: 24px; align-items: center; justify-content: start" class="flex flex-col pt-4">
+          <!-- Header -->
+          <div class="w-full flex flex-col lg:flex-row gap-6 lg:gap-0 items-stretch rounded-2xl border border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-transparent p-6 md:p-8 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset] backdrop-blur-sm">
+            <div class="flex flex-1 items-center gap-5 min-w-0">
+              <div class="relative shrink-0">
+                <div class="absolute -inset-1 rounded-full bg-[#7cf0ff]/25 blur-md opacity-80" aria-hidden="true"></div>
+                <div class="relative w-[72px] h-[72px] rounded-full object-cover ring-2 ring-white/10 ring-offset-2 ring-offset-[#0a0a0a] bg-gradient-to-r from-[#7cf0ff] to-[#00d4ff]"></div>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-[#a9b0c7]/70 mb-1">Store</p>
+                <h1 class="font-semibold text-2xl md:text-3xl tracking-tight text-white truncate">ZenScripts</h1>
+              </div>
+            </div>
+            <div class="hidden lg:block w-px self-stretch min-h-[72px] bg-gradient-to-b from-transparent via-white/15 to-transparent mx-6 shrink-0"></div>
+            <div class="flex flex-col sm:flex-row lg:flex-col gap-4 sm:gap-6 lg:gap-3 justify-center lg:justify-center lg:min-w-[200px] shrink-0">
+              <div class="rounded-xl border border-white/[0.06] bg-black/20 px-4 py-3 text-center sm:text-left">
+                <p class="text-[11px] uppercase tracking-wider text-[#a9b0c7]/60">Products sold</p>
+                <p class="text-xl font-semibold tabular-nums text-white mt-0.5">${productsSold}</p>
+              </div>
+              <div class="rounded-xl border border-white/[0.06] bg-black/20 px-4 py-3 text-center sm:text-left">
+                <p class="text-[11px] uppercase tracking-wider text-[#a9b0c7]/60">Average rating</p>
+                <div id="average-rating-stars" class="flex items-center gap-0.5 mt-1.5 justify-center sm:justify-start">${renderStars(averageRating)}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Products -->
+          ${featured.length ? `
+          <div class="w-full">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Featured</p>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-6">Top picks</h2>
+            <div class="flex flex-row justify-start flex-wrap gap-5 md:gap-6 lg:gap-7 w-full" id="featured-products">
+              ${featured.map(createProductCard).map(c => c.outerHTML).join('')}
+            </div>
+          </div>
+          ` : ''}
+
+          <!-- Catalog -->
+          <div class="w-full text-left mt-8 mb-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Catalog</p>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white">Our products</h2>
+            <p class="mt-1 text-sm text-[#a9b0c7]/70 max-w-xl">Browse everything in one place.</p>
+          </div>
+          <div class="relative w-full">
+            <div id="products" class="flex flex-row justify-start flex-wrap gap-5 md:gap-6 lg:gap-7 w-full">
+              ${products.filter(p => !p.isGroup && !p.featured).map(createProductCard).map(c => c.outerHTML).join('')}
+            </div>
+          </div>
+
+          <!-- Bundles -->
+          ${bundles.length ? `
+          <div class="w-full text-left mt-10 mb-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Value</p>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white">Our bundles</h2>
+            <p class="mt-1 text-sm text-[#a9b0c7]/70 max-w-xl">Save more when you buy together.</p>
+          </div>
+          <div id="bundles" class="flex flex-row justify-start flex-wrap gap-5 md:gap-6 lg:gap-7 w-full">
+            ${bundles.map(createBundleCard).map(c => c.outerHTML).join('')}
+          </div>
+          ` : ''}
+
+          <!-- Free scripts hub -->
+          <div class="w-full mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Free Script Hub</p>
+                <h3 class="text-xl md:text-2xl font-semibold text-white tracking-tight">500+ scripts and growing</h3>
+                <p class="mt-1 text-sm text-[#a9b0c7]/75">Edit each script's name, description, game, and links from your product data.</p>
+              </div>
+              <a href="https://hub.zenscripts.pro" class="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium bg-[#7cf0ff] text-black hover:opacity-90 transition">Open Hub</a>
+            </div>
+          </div>
+
+          <!-- Banner ads -->
+          <div class="w-full mt-10">
+            <div class="mb-3">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Advertising</p>
+              <h3 class="text-xl md:text-2xl font-semibold text-white tracking-tight">Banner slots (8)</h3>
+              <p class="mt-1 text-sm text-[#a9b0c7]/75">Click any slot to order your banner placement.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              ${[1,2,3,4,5,6,7,8].map(slot => `
+                <a href="banner-order.html?slot=${slot}" class="ad-slot rounded-xl border border-dashed border-white/30 bg-white/[0.02] p-5 min-h-[110px] flex flex-col justify-center hover:border-[#7cf0ff]/70 hover:bg-white/[0.05] transition text-center">
+                  <span class="text-[10px] uppercase tracking-[0.2em] text-[#7cf0ff]">Banner ${slot}</span>
+                  <span class="mt-2 text-white font-semibold">Put your ad here</span>
+                </a>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Sellhub buttons demo -->
+          <div class="w-full mt-10 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-5 md:p-6">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Premium Scripts</p>
+            <h3 class="text-xl md:text-2xl font-semibold text-white tracking-tight">Sellhub button area</h3>
+            <p class="mt-1 text-sm text-[#a9b0c7]/75">Use these buttons for paid products.</p>
+            <div class="mt-4 flex flex-wrap gap-3">
+              <button data-sellhub-product="4391e786-5038-4547-89d9-58c30f1c8957" class="px-4 py-2 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition">Buy Variant</button>
+              <button data-sellhub-cart-product="4391e786-5038-4547-89d9-58c30f1c8957" class="px-4 py-2 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition">Add to Cart</button>
+              <button data-sellhub-open-cart-store-url="https://pro-zen-scripts.sellhub.cx" class="px-4 py-2 bg-white text-black rounded-xl font-semibold hover:opacity-90 transition flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg> Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- How it works (static) -->
+          <div class="w-full mt-20">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Process</p>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-8">How it works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="text-center p-6">
+                <div class="w-16 h-16 bg-[#7cf0ff]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-[#7cf0ff] font-bold text-lg">1</span>
+                </div>
+                <h3 class="font-semibold mb-2">Browse & Download</h3>
+                <p class="text-sm text-[#a9b0c7]/75">Free scripts ready instantly. Premium via Sellhub.</p>
+              </div>
+              <div class="text-center p-6">
+                <div class="w-16 h-16 bg-[#7cf0ff]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-[#7cf0ff] font-bold text-lg">2</span>
+                </div>
+                <h3 class="font-semibold mb-2">Setup & Load</h3>
+                <p class="text-sm text-[#a9b0c7]/75">Compatible with Cronus Zen. Full guides available.</p>
+              </div>
+              <div class="text-center p-6">
+                <div class="w-16 h-16 bg-[#7cf0ff]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-[#7cf0ff] font-bold text-lg">3</span>
+                </div>
+                <h3 class="font-semibold mb-2">Support</h3>
+                <p class="text-sm text-[#a9b0c7]/75">Discord help, updates, and customization.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ (static) -->
+          <div class="w-full mt-20 mb-20">
+            <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#7cf0ff] mb-2">Help</p>
+            <h2 class="text-2xl md:text-3xl font-semibold tracking-tight text-white mb-8">Frequently asked questions</h2>
+            <div class="space-y-4">
+              <div class="p-6 rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+                <h4 class="font-semibold mb-2">Are these scripts safe?</h4>
+                <p class="text-sm text-[#a9b0c7]/75">Yes, all scripts are undetectably tested on major platforms.</p>
+              </div>
+              <div class="p-6 rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+                <h4 class="font-semibold mb-2">What controller do I need?</h4>
+                <p class="text-sm text-[#a9b0c7]/75">Cronus Zen required. Works with any controller.</p>
+              </div>
+              <div class="p-6 rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+                <h4 class="font-semibold mb-2">How do I get support?</h4>
+                <p class="text-sm text-[#a9b0c7]/75">Join Discord for setup help and updates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Event listeners
+      document.getElementById('announcement-close-btn')?.addEventListener('click', () => {
+        document.getElementById('announcement-div').style.display = 'none';
+      });
+
+      // Download thanks popup
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('[data-download-script="true"]') || e.target.href?.includes('.gpc')) {
+          showDownloadThanksToast();
+        }
+      });
+
+      function showDownloadThanksToast() {
+        const toast = document.createElement('div');
+        toast.id = 'download-thanks-toast';
+        toast.className = 'fixed bottom-4 right-4 z-50 max-w-sm rounded-xl border border-white/15 bg-[#0a0a0a]/95 p-4 text-sm shadow-2xl backdrop-blur-md';
+        toast.innerHTML = `
+          <div class="text-white font-semibold">Thanks for downloading!</div>
+          <div class="text-[#a9b0c7]/80 mt-1">Join our Discord for support, help with values, and updates.</div>
+          <a href="https://discord.gg/" target="_blank" rel="noopener noreferrer" class="inline-flex mt-3 text-[#7cf0ff] hover:underline">Open Discord</a>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 6500);
+      }
+
+      // Sellhub buttons (demo)
+      document.querySelectorAll('[data-sellhub-product]').forEach(btn => {
+        btn.addEventListener('click', () => alert('Redirecting to Sellhub checkout...'));
+      });
+    }
+
+    // Init
+    renderPage();
+  </script>
+</body>
+</html>
