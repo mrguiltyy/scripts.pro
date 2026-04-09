@@ -1,16 +1,3 @@
-Your data.json is broken. I can see two problems clearly.
-
-**Problem 1** — The Universal Rapid Fire script near the top has a broken features array with an unclosed string and then the entire JSON starts over again inside itself.
-
-**Problem 2** — The file appears twice, one pasted inside the other.
-
-Here is the clean correct data.json to replace yours entirely.
-
----
-
-## data.json (clean complete file)
-
-```json
 {
   "site": {
     "name": "ZenScripts",
