@@ -135,21 +135,6 @@ function buildCategories(categories) {
   `).join('');
 }
 
-/* ── Sidebar Stats ── */
-function buildSidebarStats(scripts) {
-  const card = document.getElementById('sidebar-stats');
-  if (!card) return;
-  const totalDownloads = scripts.reduce((a, s) => a + (s.downloads || 0), 0);
-  const totalScripts   = scripts.length;
-  const games          = new Set(scripts.map(s => s.game)).size;
-  card.innerHTML = `
-    <h3>📊 Site Stats</h3>
-    <div class="sidebar-stat-row"><span>Total Scripts</span><span>${totalScripts}</span></div>
-    <div class="sidebar-stat-row"><span>Total Downloads</span><span>${formatNum(totalDownloads)}</span></div>
-    <div class="sidebar-stat-row"><span>Games Covered</span><span>${games}</span></div>
-    <div class="sidebar-stat-row"><span>Always Free</span><span>✅</span></div>
-  `;
-}
 
 /* ── Apply Filters ── */
 function applyFilters() {
