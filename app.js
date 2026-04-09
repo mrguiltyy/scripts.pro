@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
       buildPartners(data.partners    || []);
       buildBanners(data.adBanners    || []);
       buildCategories(data.categories || []);
-      buildSidebarStats(data.scripts);
       applyFilters();
       bindEvents();
     })
