@@ -1,0 +1,66 @@
+<!-- Only the main grid section and JS updates are shown for brevity -->
+<div class="max-w-7xl mx-auto px-6">
+  <!-- Trending / Popular Scripts -->
+  <h2 class="text-2xl font-semibold mb-4">Popular Scripts</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10" id="popular-scripts"></div>
+
+  <!-- All Scripts Grid -->
+  <h2 class="text-2xl font-semibold mb-4">All Scripts</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-16" id="scripts-grid"></div>
+</div>
+
+<script>
+const allScripts = INITIAL_SCRIPTS; // your 5000 scripts array
+
+// Sort top 10 popular scripts (for example, by price or some fake popularity score)
+const popularScripts = allScripts.slice(0, 10);
+
+function createCard(script) {
+  const div = document.createElement('div');
+  div.className = 'card group';
+  div.style.transition = 'transform 0.2s, box-shadow 0.2s';
+
+  // Hover effect
+  div.onmouseover = () => div.style.transform = 'translateY(-5px)';
+  div.onmouseout = () => div.style.transform = 'translateY(0px)';
+
+  const isPaid = script.price > 0;
+  const link = isPaid ? script.sellhubId : script.file;
+  const tooltipText = isPaid 
+    ? 'Want full features? Visit zenscripts.pro' 
+    : 'Join our Discord for more free scripts & support!';
+
+  div.innerHTML = `
+    <h3>${script.name}</h3>
+    <p class="text-gray-400">${script.category} • ${isPaid ? 'Premium' : 'Free'}</p>
+    <a href="${link}" ${!isPaid ? 'download' : ''} class="btn ${isPaid ? 'premium' : 'download'}" title="${tooltipText}">
+      ${isPaid ? 'Buy Premium' : 'Download'}
+    </a>
+  `;
+  return div;
+}
+
+function displayScripts(containerId, scriptsArray) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  scriptsArray.forEach(script => container.appendChild(createCard(script)));
+}
+
+// Initial load
+displayScripts('popular-scripts', popularScripts);
+displayScripts('scripts-grid', allScripts);
+
+// Search function
+document.getElementById('search').addEventListener('input', (e) => {
+  const value = e.target.value.toLowerCase();
+  const filtered = allScripts.filter(s => s.name.toLowerCase().includes(value));
+  displayScripts('scripts-grid', filtered);
+});
+</script>
+
+<style>
+/* Minimalist hover glow */
+.card:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+}
+</style>
