@@ -1,8 +1,97 @@
+## ad-form.html (final section)
+
+```html
+              <div class="form-group">
+                <label class="check-label">
+                  <input type="checkbox" id="agreeTerms" required />
+                  <span class="check-box"></span>
+                  <span class="check-text">I confirm my advertisement complies with ZenScripts advertising guidelines and does not contain illegal, harmful, or misleading content. <span class="req">*</span></span>
+                </label>
+                <span class="ferr" id="err-agreeTerms"></span>
+              </div>
+              <div class="form-group">
+                <label class="check-label">
+                  <input type="checkbox" id="agreeContact" required />
+                  <span class="check-box"></span>
+                  <span class="check-text">I agree to be contacted by ZenScripts regarding my advertisement order. <span class="req">*</span></span>
+                </label>
+                <span class="ferr" id="err-agreeContact"></span>
+              </div>
+            </div>
+
+            <div class="form-submit-row">
+              <div class="form-submit-info">
+                <span>🔒 Your info is kept private.</span>
+                <span>⚡ We respond within 24 hours.</span>
+              </div>
+              <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
+                Submit Ad Order →
+              </button>
+            </div>
+
+          </form>
+
+          <div class="form-success hidden" id="form-success">
+            <div class="success-icon">✅</div>
+            <h2>Order Received!</h2>
+            <p>Thanks for your submission. We will review it and respond within <strong>24 hours</strong> to the email you provided.</p>
+            <div class="success-details" id="success-details"></div>
+            <div class="success-actions">
+              <a href="./index.html" class="btn btn-primary">Back to Scripts</a>
+              <button class="btn btn-ghost" id="submit-another">Submit Another</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="footer-logo-img" />
+          <p>Free scripts for the gaming community. No paywalls. No limits.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Site</h4>
+          <a href="./index.html#scripts">Browse Scripts</a>
+          <a href="./index.html#partners">Partners</a>
+          <a href="./ad-form.html">Advertise</a>
+        </div>
+        <div class="footer-col">
+          <h4>Partners</h4>
+          <a href="https://cheapsmm.lol" target="_blank" rel="noopener">CheapSMM</a>
+          <a href="https://zenscripts.pro" target="_blank" rel="noopener">ZenScripts Pro</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener">Discord</a>
+          <a href="./ad-form.html">Place an Ad</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 ZenScripts. All rights reserved.</p>
+        <p class="footer-disc">Scripts are provided for educational purposes. Use responsibly.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./adform.js"></script>
+</body>
+</html>
+```
+
+---
+
+## adform.css
+
+```css
 /* ═══════════════════════════════════════════════════════════
-   ADFORM.CSS — ZenScripts Ad Form Page
+   ADFORM.CSS
 ═══════════════════════════════════════════════════════════ */
 
-/* HERO */
 .adform-hero {
   position: relative;
   padding: 140px 24px 80px;
@@ -28,17 +117,16 @@
   line-height: 1.7;
 }
 
-/* STATS BAR */
 .adform-stats {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 8px;
   background: var(--card);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 24px;
+  gap: 8px;
 }
 .astat {
   display: flex;
@@ -67,10 +155,7 @@
   background: var(--border);
 }
 
-/* MAIN LAYOUT */
-.adform-main {
-  padding: 56px 24px 80px;
-}
+.adform-main { padding: 56px 24px 80px; }
 .adform-wrap {
   max-width: 1200px;
   margin: 0 auto;
@@ -80,7 +165,6 @@
   align-items: start;
 }
 
-/* SIDEBAR */
 .adform-sidebar {
   display: flex;
   flex-direction: column;
@@ -109,12 +193,7 @@
   margin-bottom: 14px;
 }
 
-/* PLACEMENT LIST */
-.placement-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+.placement-list { display: flex; flex-direction: column; gap: 12px; }
 .placement-item {
   padding: 12px;
   background: var(--bg2);
@@ -129,11 +208,7 @@
   justify-content: space-between;
   margin-bottom: 6px;
 }
-.placement-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text);
-}
+.placement-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
 .placement-badge {
   font-size: 0.68rem;
   font-weight: 600;
@@ -143,50 +218,15 @@
   border: 1px solid var(--border);
   color: var(--muted);
 }
-.placement-badge.hot {
-  background: rgba(239,68,68,0.12);
-  border-color: rgba(239,68,68,0.3);
-  color: #ef4444;
-}
-.placement-badge.pop {
-  background: var(--rec-bg);
-  border-color: var(--rec-border);
-  color: var(--rec-text);
-}
-.placement-item p {
-  font-size: 0.78rem;
-  color: var(--muted);
-  line-height: 1.5;
-  margin-bottom: 8px;
-}
-.placement-meta {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.placement-meta span {
-  font-size: 0.7rem;
-  color: var(--muted);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  padding: 2px 8px;
-  border-radius: 5px;
-}
+.placement-badge.hot { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.3); color: #ef4444; }
+.placement-badge.pop { background: var(--rec-bg); border-color: var(--rec-border); color: var(--rec-text); }
+.placement-item p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; margin-bottom: 8px; }
+.placement-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.placement-meta span { font-size: 0.7rem; color: var(--muted); background: var(--bg); border: 1px solid var(--border); padding: 2px 8px; border-radius: 5px; }
 
-/* ACCEPT LIST */
-.accept-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.accept-list li {
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
+.accept-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.accept-list li { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
 
-/* CONTACT LINKS */
 .contact-link {
   display: flex;
   align-items: center;
@@ -202,49 +242,16 @@
   transition: all 0.2s;
   text-decoration: none;
 }
-.contact-link:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateX(3px);
-}
+.contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateX(3px); }
 
-/* FORM CARD */
 .adform-form-wrap { display: flex; flex-direction: column; gap: 20px; }
-.form-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-}
-.form-card-head {
-  padding: 28px 32px 22px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg2);
-}
-.form-card-head h2 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 6px;
-}
-.form-card-head p {
-  font-size: 0.86rem;
-  color: var(--muted);
-  line-height: 1.6;
-}
+.form-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; }
+.form-card-head { padding: 28px 32px 22px; border-bottom: 1px solid var(--border); background: var(--bg2); }
+.form-card-head h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.form-card-head p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; }
 
-/* FORM */
-#ad-form {
-  padding: 28px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-}
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
+#ad-form { padding: 28px 32px; display: flex; flex-direction: column; gap: 36px; }
+.form-section { display: flex; flex-direction: column; gap: 18px; }
 .form-section-label {
   display: flex;
   align-items: center;
@@ -268,19 +275,9 @@
   justify-content: center;
   flex-shrink: 0;
 }
-.form-row { display: flex; gap: 14px; }
 .form-row.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  flex: 1;
-}
-.form-group label {
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--text);
-}
+.form-group { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.form-group label { font-size: 0.84rem; font-weight: 600; color: var(--text); }
 .req { color: #ef4444; }
 .form-group input,
 .form-group textarea,
@@ -315,12 +312,7 @@
 .char-count { text-align: right; }
 .ferr { font-size: 0.75rem; color: #ef4444; min-height: 14px; }
 
-/* PLACEMENT GRID */
-.placement-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
+.placement-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
 .placement-opt { cursor: pointer; }
 .placement-opt input[type="radio"] { display: none; }
 .placement-opt-card {
@@ -345,7 +337,6 @@
 .poc-name { font-size: 0.78rem; font-weight: 600; color: var(--text); }
 .poc-size { font-size: 0.68rem; color: var(--muted); }
 
-/* DURATION PILLS */
 .duration-pills { display: flex; gap: 8px; flex-wrap: wrap; }
 .dur-pill {
   padding: 7px 16px;
@@ -362,15 +353,9 @@
 .dur-pill:hover { border-color: var(--accent); color: var(--accent); }
 .dur-pill.active { background: var(--grad); border-color: transparent; color: #fff; }
 
-/* CHECKBOXES */
-.check-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  cursor: pointer;
-}
+.check-label { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
 .check-label input[type="checkbox"] { display: none; }
-.check-box {
+.check-box{
   width: 20px;
   height: 20px;
   border-radius: 6px;
@@ -395,7 +380,6 @@
 }
 .check-text { font-size: 0.84rem; color: var(--muted); line-height: 1.6; }
 
-/* SUBMIT ROW */
 .form-submit-row {
   display: flex;
   align-items: center;
@@ -405,15 +389,10 @@
   gap: 16px;
   flex-wrap: wrap;
 }
-.form-submit-info {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
+.form-submit-info { display: flex; flex-direction: column; gap: 5px; }
 .form-submit-info span { font-size: 0.78rem; color: var(--muted); }
 .submit-btn { padding: 13px 32px; font-size: 0.95rem; min-width: 190px; }
 
-/* SUCCESS STATE */
 .form-success {
   padding: 56px 32px;
   text-align: center;
@@ -422,7 +401,6 @@
   align-items: center;
   gap: 14px;
 }
-.form-success.visible { display: flex; }
 .success-icon { font-size: 3.5rem; animation: bounceIn 0.5s ease; }
 @keyframes bounceIn {
   0%   { transform: scale(0); opacity: 0; }
@@ -449,23 +427,25 @@
   align-items: center;
   font-size: 0.84rem;
   gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
 }
+.sdet-row:last-child { border-bottom: none; }
 .sdet-row span:first-child { color: var(--muted); }
 .sdet-row span:last-child { color: var(--text); font-weight: 600; text-align: right; }
 .success-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 6px; }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) {
   .adform-wrap { grid-template-columns: 1fr; }
   .adform-sidebar { position: static; }
-  .placement-grid { grid-template-columns: repeat(2, 1fr); }
+  .placement-grid { grid-template-columns: repeat(2,1fr); }
 }
 @media (max-width: 640px) {
   .adform-hero { padding: 120px 20px 56px; }
   #ad-form { padding: 22px 18px; }
   .form-card-head { padding: 22px 18px; }
   .form-row.two-col { grid-template-columns: 1fr; }
-  .placement-grid { grid-template-columns: repeat(2, 1fr); }
+  .placement-grid { grid-template-columns: repeat(2,1fr); }
   .adform-stats { gap: 12px; }
   .astat { padding: 0 14px; }
   .astat-div { display: none; }
