@@ -364,11 +364,16 @@ img { max-width: 100%; display: block; }
 .tag-btn.tag-rec.active { background: #a78bfa; border-color: transparent; color: #fff; }
 
 /* SCRIPTS LAYOUT */
-.scripts-layout { display: grid; grid-template-columns: 1fr 280px; gap: 28px; align-items: start; }
-.scripts-main { display: flex; flex-direction: column; gap: 20px; }
-
-/* SCRIPTS GRID */
-.scripts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px; }
+.scripts-layout-full {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.scripts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
 
 /* SCRIPT CARD */
 .script-card {
