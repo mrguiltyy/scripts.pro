@@ -7,23 +7,22 @@
   <meta name="description" content="Browse and download 500+ free scripts for Rust, R6 Siege, COD, Minecraft, Valorant and more." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
-      <a href="#" class="nav-logo" id="nav-logo">
-        <span class="logo-icon">⚡</span>
-        <span class="logo-text">ZenScripts</span>
+      <a href="#" class="nav-logo">
+        <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="nav-logo-img" />
+        <span class="nav-logo-text">ZenScripts</span>
       </a>
       <div class="nav-links">
         <a href="#scripts" class="nav-link">Scripts</a>
         <a href="#partners" class="nav-link">Partners</a>
         <a href="ad-form.html" class="nav-link nav-cta">Advertise</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <button class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -34,183 +33,139 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <header class="hero" id="hero">
+  <header class="hero">
     <div class="hero-bg">
-      <div class="hero-orb orb-1"></div>
-      <div class="hero-orb orb-2"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
       <div class="hero-grid"></div>
     </div>
     <div class="hero-content">
       <div class="hero-badge">🚀 500+ Free Scripts Available</div>
-      <h1 class="hero-title">
-        Free Scripts.<br />
-        <span class="gradient-text">No Limits.</span>
-      </h1>
-      <p class="hero-sub">
-        Browse, search, and download scripts for Rust, R6 Siege, COD, Minecraft, Valorant and more. Always free. Always updated.
-      </p>
-      <div class="hero-actions">
+      <h1>Free Scripts.<br /><span class="gradient-text">No Limits.</span></h1>
+      <p>Browse and download scripts for Rust, R6 Siege, COD, Minecraft, Valorant and more. Always free.</p>
+      <div class="hero-btns">
         <a href="#scripts" class="btn btn-primary">Browse Scripts</a>
         <a href="#partners" class="btn btn-ghost">Our Partners</a>
       </div>
       <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num" id="stat-scripts">500+</span>
-          <span class="stat-label">Scripts</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" id="stat-downloads">1M+</span>
-          <span class="stat-label">Downloads</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" id="stat-games">8</span>
-          <span class="stat-label">Games</span>
-        </div>
+        <div class="hstat"><span class="hstat-n">500+</span><span class="hstat-l">Scripts</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-n">1M+</span><span class="hstat-l">Downloads</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><span class="hstat-n">8</span><span class="hstat-l">Games</span></div>
       </div>
     </div>
-    <div id="slot-hero-bottom" class="banner-slot-hero"></div>
+    <div class="hero-banner-slot" id="slot-hero"></div>
   </header>
 
-  <!-- PARTNERS -->
   <section class="partners-section" id="partners">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Our Partners</h2>
-        <p class="section-sub">Trusted services we personally recommend</p>
+        <h2>Our Partners</h2>
+        <p>Trusted services we personally recommend</p>
       </div>
       <div class="partners-grid" id="partners-grid"></div>
     </div>
   </section>
 
-  <!-- SCRIPTS -->
   <section class="scripts-section" id="scripts">
-    <div class="scripts-inner">
+    <div class="container">
 
-      <!-- Top Controls -->
-      <div class="controls-bar">
+      <div class="controls">
         <div class="controls-left">
-          <h2 class="section-title">Free Scripts</h2>
-          <span class="results-count" id="results-count">Loading...</span>
+          <h2>Free Scripts</h2>
+          <span class="result-count" id="result-count"></span>
         </div>
         <div class="controls-right">
-          <div class="search-wrap">
-            <span class="search-icon">🔍</span>
-            <input
-              type="text"
-              id="search-input"
-              class="search-input"
-              placeholder="Search scripts or games..."
-              autocomplete="off"
-            />
-            <button class="search-clear" id="search-clear" aria-label="Clear search">✕</button>
+          <div class="search-box">
+            <span>🔍</span>
+            <input type="text" id="search" placeholder="Search scripts or games..." autocomplete="off" />
+            <button id="search-clear" class="clear-btn">✕</button>
           </div>
-          <select id="sort-select" class="sort-select">
+          <select id="sort" class="sort-select">
             <option value="popular">Most Popular</option>
             <option value="newest">Newest</option>
-            <option value="rating">Top Rated</option>
             <option value="az">A — Z</option>
           </select>
         </div>
       </div>
 
-      <!-- Category Tabs -->
-      <div class="category-tabs-wrap">
-        <div class="category-tabs" id="category-tabs"></div>
+      <div class="cat-tabs-wrap">
+        <div class="cat-tabs" id="cat-tabs"></div>
       </div>
 
-      <!-- Tag Filters -->
-      <div class="tag-filters" id="tag-filters">
-        <span class="tag-filter-label">Filter:</span>
-        <button class="tag-filter active" data-tag="all">All</button>
-        <button class="tag-filter tag-new" data-tag="new">🟢 New</button>
-        <button class="tag-filter tag-popular" data-tag="popular">🔥 Popular</button>
-        <button class="tag-filter tag-recommended" data-tag="recommended">⭐ Recommended</button>
+      <div class="tag-row">
+        <span class="tag-label">Filter:</span>
+        <button class="tag-btn active" data-tag="all">All</button>
+        <button class="tag-btn tag-new" data-tag="new">🟢 New</button>
+        <button class="tag-btn tag-popular" data-tag="popular">🔥 Popular</button>
+        <button class="tag-btn tag-rec" data-tag="recommended">⭐ Recommended</button>
       </div>
 
-      <!-- Scripts Layout: Grid + Sidebar -->
       <div class="scripts-layout">
-
-        <!-- Script Grid -->
-        <div class="scripts-grid-wrap">
+        <div class="scripts-main">
           <div class="scripts-grid" id="scripts-grid"></div>
-          <div class="no-results" id="no-results">
-            <span class="no-results-icon">🔍</span>
+          <div class="no-results hidden" id="no-results">
+            <div class="no-results-icon">🔍</div>
             <h3>No scripts found</h3>
-            <p>Try a different search term or category.</p>
-            <button class="btn btn-ghost" id="clear-filters">Clear Filters</button>
+            <p>Try a different search or category.</p>
+            <button class="btn btn-ghost" id="clear-all">Clear Filters</button>
           </div>
-          <div class="load-more-wrap" id="load-more-wrap">
-            <button class="btn btn-ghost load-more-btn" id="load-more-btn">
-              Load More Scripts
-            </button>
+          <div class="load-more-wrap hidden" id="load-more-wrap">
+            <button class="btn btn-ghost" id="load-more">Load More</button>
           </div>
         </div>
-
-        <!-- Sidebar -->
         <aside class="scripts-sidebar">
-          <div id="slot-sidebar" class="banner-slot-sidebar"></div>
-          <div class="sidebar-stats-card">
-            <h3>📊 Site Stats</h3>
-            <div class="sidebar-stat-list" id="sidebar-stat-list"></div>
-          </div>
-          <div class="sidebar-games-card">
-            <h3>🎮 Supported Games</h3>
-            <div class="sidebar-games-list" id="sidebar-games-list"></div>
-          </div>
+          <div id="slot-sidebar"></div>
+          <div class="sidebar-card" id="sidebar-stats"></div>
         </aside>
-
       </div>
 
-      <!-- Mid Banner Slot -->
-      <div id="slot-mid" class="banner-slot-wide"></div>
+      <div class="mid-banner-wrap" id="slot-mid"></div>
 
     </div>
   </section>
 
-  <!-- Pre-Footer Banner -->
-  <div id="slot-footer" class="banner-slot-wide container-pad"></div>
+  <div class="footer-banner-wrap" id="slot-footer"></div>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-icon">⚡</span>
-            <span class="logo-text">ZenScripts</span>
-          </div>
-          <p class="footer-tagline">Free scripts for the gaming community. No paywalls. No limits.</p>
+          <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="footer-logo-img" />
+          <p>Free scripts for the gaming community. No paywalls. No limits.</p>
         </div>
-        <div class="footer-links-group">
-          <h4>Navigation</h4>
+        <div class="footer-col">
+          <h4>Site</h4>
           <a href="#scripts">Browse Scripts</a>
           <a href="#partners">Partners</a>
           <a href="ad-form.html">Advertise</a>
         </div>
-        <div class="footer-links-group">
+        <div class="footer-col">
           <h4>Partners</h4>
           <a href="https://cheapsmm.lol" target="_blank" rel="noopener">CheapSMM</a>
           <a href="https://zenscripts.pro" target="_blank" rel="noopener">ZenScripts Pro</a>
         </div>
-        <div class="footer-links-group">
+        <div class="footer-col">
           <h4>Community</h4>
           <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener">Discord</a>
           <a href="ad-form.html">Place an Ad</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2024 ZenScripts. All rights reserved.</p>
-        <p class="footer-disclaimer">Scripts are provided for educational purposes. Use responsibly.</p>
+        <p>© 2024 ZenScripts. All rights reserved.</p>
+        <p class="footer-disc">Scripts are provided for educational purposes. Use responsibly.</p>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT MODAL -->
-  <div class="modal-overlay" id="modal-overlay">
+  <div class="modal-overlay hidden" id="modal-overlay">
     <div class="modal" id="modal">
       <button class="modal-close" id="modal-close">✕</button>
-      <div class="modal-content" id="modal-content"></div>
-    </div
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
