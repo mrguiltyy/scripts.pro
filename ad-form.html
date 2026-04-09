@@ -8,23 +8,22 @@
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="adform.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
-<body class="adform-page">
+<body>
 
-  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <span class="logo-icon">⚡</span>
-        <span class="logo-text">ZenScripts</span>
+        <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="nav-logo-img" />
+        <span class="nav-logo-text">ZenScripts</span>
       </a>
       <div class="nav-links">
         <a href="index.html#scripts" class="nav-link">Scripts</a>
         <a href="index.html#partners" class="nav-link">Partners</a>
-        <a href="ad-form.html" class="nav-link nav-cta active">Advertise</a>
+        <a href="ad-form.html" class="nav-link nav-cta">Advertise</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+      <button class="hamburger" id="hamburger">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -35,472 +34,275 @@
     </div>
   </nav>
 
-  <!-- PAGE HERO -->
   <div class="adform-hero">
     <div class="hero-bg">
-      <div class="hero-orb orb-1"></div>
-      <div class="hero-orb orb-2"></div>
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
       <div class="hero-grid"></div>
     </div>
     <div class="adform-hero-content">
       <div class="hero-badge">💼 Advertising</div>
       <h1>Advertise on <span class="gradient-text">ZenScripts</span></h1>
-      <p>Reach thousands of active gamers every single day. Fill out the form below and we'll get back to you within 24 hours.</p>
+      <p>Reach thousands of active gamers every day. Fill out the form below and we will get back to you within 24 hours.</p>
     </div>
   </div>
 
-  <!-- STATS BAR -->
-  <div class="adform-stats-bar">
-    <div class="adform-stat">
-      <span class="adform-stat-num">10K+</span>
-      <span class="adform-stat-label">Daily Visitors</span>
-    </div>
-    <div class="adform-stat-divider"></div>
-    <div class="adform-stat">
-      <span class="adform-stat-num">500+</span>
-      <span class="adform-stat-label">Free Scripts</span>
-    </div>
-    <div class="adform-stat-divider"></div>
-    <div class="adform-stat">
-      <span class="adform-stat-num">4</span>
-      <span class="adform-stat-label">Ad Placements</span>
-    </div>
-    <div class="adform-stat-divider"></div>
-    <div class="adform-stat">
-      <span class="adform-stat-num">24hr</span>
-      <span class="adform-stat-label">Response Time</span>
-    </div>
+  <div class="adform-stats">
+    <div class="astat"><span class="astat-n">10K+</span><span class="astat-l">Daily Visitors</span></div>
+    <div class="astat-div"></div>
+    <div class="astat"><span class="astat-n">500+</span><span class="astat-l">Free Scripts</span></div>
+    <div class="astat-div"></div>
+    <div class="astat"><span class="astat-n">4</span><span class="astat-l">Ad Placements</span></div>
+    <div class="astat-div"></div>
+    <div class="astat"><span class="astat-n">24hr</span><span class="astat-l">Response Time</span></div>
   </div>
 
-  <!-- MAIN CONTENT -->
   <main class="adform-main">
-    <div class="adform-container">
+    <div class="adform-wrap">
 
-      <!-- LEFT: AD PLACEMENT INFO -->
       <aside class="adform-sidebar">
 
-        <div class="placement-card">
-          <h3 class="placement-title">📍 Available Placements</h3>
+        <div class="aform-card">
+          <h3>📍 Ad Placements</h3>
           <div class="placement-list">
 
             <div class="placement-item">
-              <div class="placement-item-header">
+              <div class="placement-item-top">
                 <span class="placement-name">Hero Banner</span>
                 <span class="placement-badge hot">🔥 Hot</span>
               </div>
-              <p class="placement-desc">Full-width banner directly below the hero section. First thing visitors see after landing.</p>
+              <p>Full-width banner directly below the hero. First thing visitors see.</p>
               <div class="placement-meta">
-                <span class="pmeta">📐 1200×120px</span>
-                <span class="pmeta">👁️ Highest Visibility</span>
+                <span>📐 1200×120px</span>
+                <span>👁️ Highest Visibility</span>
               </div>
             </div>
 
             <div class="placement-item">
-              <div class="placement-item-header">
+              <div class="placement-item-top">
                 <span class="placement-name">Mid-Content Banner</span>
-                <span class="placement-badge popular">⭐ Popular</span>
+                <span class="placement-badge pop">⭐ Popular</span>
               </div>
-              <p class="placement-desc">Wide banner placed between script categories. Seen by users actively browsing scripts.</p>
+              <p>Wide banner between script categories. Seen by active browsers.</p>
               <div class="placement-meta">
-                <span class="pmeta">📐 1200×120px</span>
-                <span class="pmeta">👁️ High Visibility</span>
+                <span>📐 1200×120px</span>
+                <span>👁️ High Visibility</span>
               </div>
             </div>
 
             <div class="placement-item">
-              <div class="placement-item-header">
+              <div class="placement-item-top">
                 <span class="placement-name">Sidebar Box</span>
                 <span class="placement-badge">📦 Box</span>
               </div>
-              <p class="placement-desc">Square sidebar ad shown alongside the script grid. Persistent as users scroll.</p>
+              <p>Square sidebar ad shown alongside the script grid. Persistent scroll.</p>
               <div class="placement-meta">
-                <span class="pmeta">📐 300×300px</span>
-                <span class="pmeta">👁️ Persistent</span>
+                <span>📐 300×300px</span>
+                <span>👁️ Persistent</span>
               </div>
             </div>
 
             <div class="placement-item">
-              <div class="placement-item-header">
+              <div class="placement-item-top">
                 <span class="placement-name">Pre-Footer Banner</span>
                 <span class="placement-badge">📌 Footer</span>
               </div>
-              <p class="placement-desc">Full-width banner above the footer. Seen by users who scroll through all content.</p>
+              <p>Full-width banner above the footer. Seen by users who scroll all content.</p>
               <div class="placement-meta">
-                <span class="pmeta">📐 1200×120px</span>
-                <span class="pmeta">👁️ Good Reach</span>
+                <span>📐 1200×120px</span>
+                <span>👁️ Good Reach</span>
               </div>
             </div>
 
           </div>
         </div>
 
-        <div class="adform-info-card">
+        <div class="aform-card">
           <h3>📋 What We Accept</h3>
           <ul class="accept-list">
-            <li>✅ Gaming products & services</li>
-            <li>✅ Software & tools</li>
-            <li>✅ SMM panels & growth services</li>
-            <li>✅ Game servers & communities</li>
-            <li>✅ Digital products & downloads</li>
-            <li>✅ Streaming & content services</li>
+            <li>✅ Gaming products and services</li>
+            <li>✅ Software and tools</li>
+            <li>✅ SMM panels and growth services</li>
+            <li>✅ Game servers and communities</li>
+            <li>✅ Digital products and downloads</li>
+            <li>✅ Streaming and content services</li>
             <li>❌ Illegal content or services</li>
             <li>❌ Malware or harmful software</li>
             <li>❌ Misleading advertisements</li>
           </ul>
         </div>
 
-        <div class="adform-info-card contact-card">
+        <div class="aform-card">
           <h3>💬 Questions?</h3>
-          <p>Reach out to us directly before submitting if you have any questions about placements or pricing.</p>
-          <a href="mailto:ads@zenscripts.pro" class="contact-link">
-            <span>📧</span> ads@zenscripts.pro
-          </a>
-          <a href="https://discord.gg/zenscripts" target="_blank" class="contact-link discord-link">
-            <span>🎮</span> Discord Server
-          </a>
+          <p>Reach out before submitting if you have questions about placements or pricing.</p>
+          <a href="mailto:ads@zenscripts.pro" class="contact-link">📧 ads@zenscripts.pro</a>
+          <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener" class="contact-link">🎮 Discord Server</a>
         </div>
 
       </aside>
 
-      <!-- RIGHT: THE FORM -->
       <div class="adform-form-wrap">
-
         <div class="form-card">
-          <div class="form-card-header">
+          <div class="form-card-head">
             <h2>📝 Ad Order Form</h2>
-            <p>Fill out all fields below. We review every submission manually and respond within 24 hours.</p>
+            <p>Fill out all required fields. We review every submission and respond within 24 hours.</p>
           </div>
 
-          <form id="ad-form" class="ad-form" novalidate>
+          <form id="ad-form" novalidate>
 
-            <!-- SECTION: Your Info -->
             <div class="form-section">
-              <div class="form-section-label">
-                <span class="form-section-num">01</span>
-                <span>Your Information</span>
-              </div>
+              <div class="form-section-label"><span class="fsnum">01</span> Your Information</div>
 
               <div class="form-row two-col">
                 <div class="form-group">
-                  <label for="first-name" class="form-label">First Name <span class="required">*</span></label>
-                  <input
-                    type="text"
-                    id="first-name"
-                    name="firstName"
-                    class="form-input"
-                    placeholder="John"
-                    required
-                  />
-                  <span class="form-error" id="error-first-name"></span>
+                  <label>First Name <span class="req">*</span></label>
+                  <input type="text" id="firstName" placeholder="John" required />
+                  <span class="ferr" id="err-firstName"></span>
                 </div>
                 <div class="form-group">
-                  <label for="last-name" class="form-label">Last Name <span class="required">*</span></label>
-                  <input
-                    type="text"
-                    id="last-name"
-                    name="lastName"
-                    class="form-input"
-                    placeholder="Doe"
-                    required
-                  />
-                  <span class="form-error" id="error-last-name"></span>
+                  <label>Last Name <span class="req">*</span></label>
+                  <input type="text" id="lastName" placeholder="Doe" required />
+                  <span class="ferr" id="err-lastName"></span>
                 </div>
               </div>
 
               <div class="form-row two-col">
                 <div class="form-group">
-                  <label for="email" class="form-label">Email Address <span class="required">*</span></label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    class="form-input"
-                    placeholder="john@example.com"
-                    required
-                  />
-                  <span class="form-error" id="error-email"></span>
+                  <label>Email Address <span class="req">*</span></label>
+                  <input type="email" id="email" placeholder="john@example.com" required />
+                  <span class="ferr" id="err-email"></span>
                 </div>
                 <div class="form-group">
-                  <label for="discord" class="form-label">Discord Username</label>
-                  <input
-                    type="text"
-                    id="discord"
-                    name="discord"
-                    class="form-input"
-                    placeholder="username#0000 or username"
-                  />
+                  <label>Discord Username</label>
+                  <input type="text" id="discord" placeholder="username or user#0000" />
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="company" class="form-label">Company / Brand Name <span class="required">*</span></label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  class="form-input"
-                  placeholder="Your brand or company name"
-                  required
-                />
-                <span class="form-error" id="error-company"></span>
+                <label>Company / Brand Name <span class="req">*</span></label>
+                <input type="text" id="company" placeholder="Your brand or company name" required />
+                <span class="ferr" id="err-company"></span>
               </div>
-
             </div>
 
-            <!-- SECTION: Ad Details -->
             <div class="form-section">
-              <div class="form-section-label">
-                <span class="form-section-num">02</span>
-                <span>Advertisement Details</span>
+              <div class="form-section-label"><span class="fsnum">02</span> Advertisement Details</div>
+
+              <div class="form-group">
+                <label>Destination URL <span class="req">*</span></label>
+                <input type="url" id="adUrl" placeholder="https://yourwebsite.com" required />
+                <span class="fhint">Where users go when they click your ad.</span>
+                <span class="ferr" id="err-adUrl"></span>
               </div>
 
               <div class="form-group">
-                <label for="ad-url" class="form-label">Destination URL <span class="required">*</span></label>
-                <input
-                  type="url"
-                  id="ad-url"
-                  name="adUrl"
-                  class="form-input"
-                  placeholder="https://yourwebsite.com"
-                  required
-                />
-                <span class="form-hint">Where should users go when they click your ad?</span>
-                <span class="form-error" id="error-ad-url"></span>
+                <label>Ad Headline <span class="req">*</span></label>
+                <input type="text" id="adTitle" placeholder="e.g. Get Premium Scripts at ZenScripts Pro" maxlength="80" required />
+                <span class="fhint char-count" id="count-adTitle">0 / 80</span>
+                <span class="ferr" id="err-adTitle"></span>
               </div>
 
               <div class="form-group">
-                <label for="ad-title" class="form-label">Ad Headline / Title <span class="required">*</span></label>
-                <input
-                  type="text"
-                  id="ad-title"
-                  name="adTitle"
-                  class="form-input"
-                  placeholder="e.g. Get Premium Scripts at ZenScripts Pro"
-                  maxlength="80"
-                  required
-                />
-                <span class="form-hint char-count" id="title-count">0 / 80 characters</span>
-                <span class="form-error" id="error-ad-title"></span>
+                <label>Ad Description <span class="req">*</span></label>
+                <textarea id="adDesc" placeholder="Describe your product or service..." maxlength="300" rows="4" required></textarea>
+                <span class="fhint char-count" id="count-adDesc">0 / 300</span>
+                <span class="ferr" id="err-adDesc"></span>
               </div>
 
               <div class="form-group">
-                <label for="ad-description" class="form-label">Ad Description <span class="required">*</span></label>
-                <textarea
-                  id="ad-description"
-                  name="adDescription"
-                  class="form-input form-textarea"
-                  placeholder="Describe your product or service in a few sentences. This helps us understand your brand."
-                  maxlength="300"
-                  rows="4"
-                  required
-                ></textarea>
-                <span class="form-hint char-count" id="desc-count">0 / 300 characters</span>
-                <span class="form-error" id="error-ad-description"></span>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Ad Placement <span class="required">*</span></label>
-                <div class="placement-select-grid" id="placement-select-grid">
-                  <label class="placement-option">
+                <label>Ad Placement <span class="req">*</span></label>
+                <div class="placement-grid">
+                  <label class="placement-opt">
                     <input type="radio" name="placement" value="hero" required />
-                    <div class="placement-option-card">
-                      <span class="po-icon">🔥</span>
-                      <span class="po-name">Hero Banner</span>
-                      <span class="po-size">1200×120px</span>
+                    <div class="placement-opt-card">
+                      <span class="poc-icon">🔥</span>
+                      <span class="poc-name">Hero Banner</span>
+                      <span class="poc-size">1200×120px</span>
                     </div>
                   </label>
-                  <label class="placement-option">
+                  <label class="placement-opt">
                     <input type="radio" name="placement" value="mid" />
-                    <div class="placement-option-card">
-                      <span class="po-icon">⭐</span>
-                      <span class="po-name">Mid-Content</span>
-                      <span class="po-size">1200×120px</span>
+                    <div class="placement-opt-card">
+                      <span class="poc-icon">⭐</span>
+                      <span class="poc-name">Mid-Content</span>
+                      <span class="poc-size">1200×120px</span>
                     </div>
                   </label>
-                  <label class="placement-option">
+                  <label class="placement-opt">
                     <input type="radio" name="placement" value="sidebar" />
-                    <div class="placement-option-card">
-                      <span class="po-icon">📦</span>
-                      <span class="po-name">Sidebar Box</span>
-                      <span class="po-size">300×300px</span>
+                    <div class="placement-opt-card">
+                      <span class="poc-icon">📦</span>
+                      <span class="poc-name">Sidebar Box</span>
+                      <span class="poc-size">300×300px</span>
                     </div>
                   </label>
-                  <label class="placement-option">
+                  <label class="placement-opt">
                     <input type="radio" name="placement" value="footer" />
-                    <div class="placement-option-card">
-                      <span class="po-icon">📌</span>
-                      <span class="po-name">Pre-Footer</span>
-                      <span class="po-size">1200×120px</span>
+                    <div class="placement-opt-card">
+                      <span class="poc-icon">📌</span>
+                      <span class="poc-name">Pre-Footer</span>
+                      <span class="poc-size">1200×120px</span>
                     </div>
                   </label>
                 </div>
-                <span class="form-error" id="error-placement"></span>
+                <span class="ferr" id="err-placement"></span>
               </div>
-
             </div>
 
-            <!-- SECTION: Creative Assets -->
             <div class="form-section">
-              <div class="form-section-label">
-                <span class="form-section-num">03</span>
-                <span>Creative Assets</span>
+              <div class="form-section-label"><span class="fsnum">03</span> Creative Assets</div>
+
+              <div class="form-group">
+                <label>Banner Image URL</label>
+                <input type="url" id="adImage" placeholder="https://yoursite.com/banner.png" />
+                <span class="fhint">Link to your banner image matching the placement dimensions.</span>
               </div>
 
               <div class="form-group">
-                <label for="ad-image-url" class="form-label">Ad Image URL</label>
-                <input
-                  type="url"
-                  id="ad-image-url"
-                  name="adImageUrl"
-                  class="form-input"
-                  placeholder="https://yoursite.com/banner.png"
-                />
-                <span class="form-hint">Link to your banner image. Must match the placement dimensions above.</span>
+                <label>Logo URL</label>
+                <input type="url" id="adLogo" placeholder="https://yoursite.com/logo.png" />
+                <span class="fhint">Optional. Your brand logo shown alongside the ad.</span>
               </div>
 
               <div class="form-group">
-                <label for="ad-logo-url
-                                <div class="form-group">
-                <label for="ad-logo-url" class="form-label">Logo URL</label>
-                <input
-                  type="url"
-                  id="ad-logo-url"
-                  name="adLogoUrl"
-                  class="form-input"
-                  placeholder="https://yoursite.com/logo.png"
-                />
-                <span class="form-hint">Optional. Your brand logo shown alongside the ad.</span>
+                <label>Call To Action Text</label>
+                <input type="text" id="adCta" placeholder="e.g. Shop Now, Learn More, Get Started" maxlength="30" />
+                <span class="fhint char-count" id="count-adCta">0 / 30</span>
               </div>
-
-              <div class="form-group">
-                <label for="ad-cta" class="form-label">Call To Action Text</label>
-                <input
-                  type="text"
-                  id="ad-cta"
-                  name="adCta"
-                  class="form-input"
-                  placeholder="e.g. Shop Now, Learn More, Get Started"
-                  maxlength="30"
-                />
-                <span class="form-hint char-count" id="cta-count">0 / 30 characters</span>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Ad Color Theme</label>
-                <div class="color-theme-grid">
-                  <label class="color-option">
-                    <input type="radio" name="colorTheme" value="purple" checked />
-                    <div class="color-swatch" style="background: linear-gradient(135deg,#6c63ff,#a855f7);">
-                      <span class="color-check">✓</span>
-                    </div>
-                    <span class="color-name">Purple</span>
-                  </label>
-                  <label class="color-option">
-                    <input type="radio" name="colorTheme" value="blue" />
-                    <div class="color-swatch" style="background: linear-gradient(135deg,#3b82f6,#06b6d4);">
-                      <span class="color-check">✓</span>
-                    </div>
-                    <span class="color-name">Blue</span>
-                  </label>
-                  <label class="color-option">
-                    <input type="radio" name="colorTheme" value="green" />
-                    <div class="color-swatch" style="background: linear-gradient(135deg,#10b981,#00d4aa);">
-                      <span class="color-check">✓</span>
-                    </div>
-                    <span class="color-name">Green</span>
-                  </label>
-                  <label class="color-option">
-                    <input type="radio" name="colorTheme" value="red" />
-                    <div class="color-swatch" style="background: linear-gradient(135deg,#ef4444,#f97316);">
-                      <span class="color-check">✓</span>
-                    </div>
-                    <span class="color-name">Red</span>
-                  </label>
-                  <label class="color-option">
-                    <input type="radio" name="colorTheme" value="gold" />
-                    <div class="color-swatch" style="background: linear-gradient(135deg,#f59e0b,#fbbf24);">
-                      <span class="color-check">✓</span>
-                    </div>
-                    <span class="color-name">Gold</span>
-                  </label>
-                  <label class="color-option">
-                    <input type="radio" name="colorTheme" value="custom" />
-                    <div class="color-swatch custom-swatch">
-                      <span>🎨</span>
-                    </div>
-                    <span class="color-name">Custom</span>
-                  </label>
-                </div>
-                <div class="custom-color-row" id="custom-color-row">
-                  <div class="form-row two-col">
-                    <div class="form-group">
-                      <label class="form-label">Primary Color</label>
-                      <div class="color-picker-wrap">
-                        <input type="color" id="custom-color-1" name="customColor1" class="color-picker" value="#6c63ff" />
-                        <input type="text" id="custom-color-1-hex" class="form-input color-hex-input" value="#6c63ff" maxlength="7" />
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label class="form-label">Secondary Color</label>
-                      <div class="color-picker-wrap">
-                        <input type="color" id="custom-color-2" name="customColor2" class="color-picker" value="#a855f7" />
-                        <input type="text" id="custom-color-2-hex" class="form-input color-hex-input" value="#a855f7" maxlength="7" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             </div>
 
-            <!-- SECTION: Campaign Info -->
             <div class="form-section">
-              <div class="form-section-label">
-                <span class="form-section-num">04</span>
-                <span>Campaign Details</span>
-              </div>
+              <div class="form-section-label"><span class="fsnum">04</span> Campaign Details</div>
 
               <div class="form-row two-col">
                 <div class="form-group">
-                  <label for="start-date" class="form-label">Preferred Start Date <span class="required">*</span></label>
-                  <input
-                    type="date"
-                    id="start-date"
-                    name="startDate"
-                    class="form-input"
-                    required
-                  />
-                  <span class="form-error" id="error-start-date"></span>
+                  <label>Start Date <span class="req">*</span></label>
+                  <input type="date" id="startDate" required />
+                  <span class="ferr" id="err-startDate"></span>
                 </div>
                 <div class="form-group">
-                  <label for="end-date" class="form-label">Preferred End Date <span class="required">*</span></label>
-                  <input
-                    type="date"
-                    id="end-date"
-                    name="endDate"
-                    class="form-input"
-                    required
-                  />
-                  <span class="form-error" id="error-end-date"></span>
+                  <label>End Date <span class="req">*</span></label>
+                  <input type="date" id="endDate" required />
+                  <span class="ferr" id="err-endDate"></span>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label">Campaign Duration</label>
-                <div class="duration-pills" id="duration-pills">
-                  <button type="button" class="duration-pill" data-days="7">1 Week</button>
-                  <button type="button" class="duration-pill" data-days="14">2 Weeks</button>
-                  <button type="button" class="duration-pill" data-days="30">1 Month</button>
-                  <button type="button" class="duration-pill" data-days="90">3 Months</button>
-                  <button type="button" class="duration-pill" data-days="180">6 Months</button>
+                <label>Quick Duration</label>
+                <div class="duration-pills">
+                  <button type="button" class="dur-pill" data-days="7">1 Week</button>
+                  <button type="button" class="dur-pill" data-days="14">2 Weeks</button>
+                  <button type="button" class="dur-pill" data-days="30">1 Month</button>
+                  <button type="button" class="dur-pill" data-days="90">3 Months</button>
+                  <button type="button" class="dur-pill" data-days="180">6 Months</button>
                 </div>
-                <span class="form-hint">Click a duration to auto-fill the dates above.</span>
+                <span class="fhint">Click to auto-fill dates above.</span>
               </div>
 
               <div class="form-group">
-                <label for="budget" class="form-label">Estimated Budget</label>
-                <select id="budget" name="budget" class="form-input form-select">
-                  <option value="" disabled selected>Select your budget range</option>
+                <label>Budget Range</label>
+                <select id="budget">
+                  <option value="" disabled selected>Select your budget</option>
                   <option value="under-50">Under $50</option>
                   <option value="50-100">$50 – $100</option>
                   <option value="100-250">$100 – $250</option>
@@ -511,71 +313,51 @@
                 </select>
               </div>
 
-              <div class="form-group">
-                <label for="target-audience" class="form-label">Target Audience / Notes</label>
-                <textarea
-                  id="target-audience"
-                  name="targetAudience"
-                  class="form-input form-textarea"
-                  placeholder="Tell us about your target audience, any special requests, or additional notes for your campaign..."
-                  rows="4"
-                  maxlength="500"
-                ></textarea>
-                <span class="form-hint char-count" id="notes-count">0 / 500 characters</span>
+              <div class              <div class="form-group">
+                <label>Additional Notes</label>
+                <textarea id="notes" placeholder="Target audience, special requests, or anything else we should know..." rows="4" maxlength="500"></textarea>
+                <span class="fhint char-count" id="count-notes">0 / 500</span>
               </div>
-
             </div>
 
-            <!-- SECTION: Agreement -->
             <div class="form-section">
-              <div class="form-section-label">
-                <span class="form-section-num">05</span>
-                <span>Agreement</span>
+              <div class="form-section-label"><span class="fsnum">05</span> Agreement</div>
+
+              <div class="form-group">
+                <label class="check-label">
+                  <input type="checkbox" id="agreeTerms" required />
+                  <span class="check-box"></span>
+                  <span class="check-text">I confirm my advertisement complies with ZenScripts advertising guidelines and does not contain illegal, harmful, or misleading content. <span class="req">*</span></span>
+                </label>
+                <span class="ferr" id="err-agreeTerms"></span>
               </div>
 
               <div class="form-group">
-                <label class="checkbox-label">
-                  <input type="checkbox" id="agree-terms" name="agreeTerms" required />
-                  <span class="checkbox-custom"></span>
-                  <span class="checkbox-text">
-                    I confirm that my advertisement complies with ZenScripts' advertising guidelines and does not contain illegal, harmful, or misleading content. <span class="required">*</span>
-                  </span>
+                <label class="check-label">
+                  <input type="checkbox" id="agreeContact" required />
+                  <span class="check-box"></span>
+                  <span class="check-text">I agree to be contacted by ZenScripts regarding my advertisement order. <span class="req">*</span></span>
                 </label>
-                <span class="form-error" id="error-agree-terms"></span>
+                <span class="ferr" id="err-agreeContact"></span>
               </div>
-
-              <div class="form-group">
-                <label class="checkbox-label">
-                  <input type="checkbox" id="agree-contact" name="agreeContact" required />
-                  <span class="checkbox-custom"></span>
-                  <span class="checkbox-text">
-                    I agree to be contacted by ZenScripts regarding my advertisement order. <span class="required">*</span>
-                  </span>
-                </label>
-                <span class="form-error" id="error-agree-contact"></span>
-              </div>
-
             </div>
 
-            <!-- SUBMIT -->
-            <div class="form-submit-wrap">
+            <div class="form-submit-row">
               <div class="form-submit-info">
-                <span>🔒 Your information is kept private and never shared.</span>
+                <span>🔒 Your info is kept private.</span>
                 <span>⚡ We respond within 24 hours.</span>
               </div>
-              <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
-                <span class="submit-text">Submit Ad Order</span>
-                <span class="submit-icon">→</span>
+              <button type="submit" class="btn btn-primary submit-btn" id="submit-btn">
+                Submit Ad Order →
               </button>
             </div>
 
           </form>
 
-          <!-- SUCCESS STATE -->
-          <div class="form-success" id="form-success">
+          <div class="form-success hidden" id="form-success">
             <div class="success-icon">✅</div>
             <h2>Order Received!</h2>
-            <p>Thanks for your submission. We've received your ad order and will review it shortly. Expect a response within <strong>24 hours</strong> to the email you provided.</p>
+            <p>Thanks for your submission. We have received your ad order and will review it shortly. Expect a response within <strong>24 hours</strong> to the email you provided.</p>
             <div class="success-details" id="success-details"></div>
             <div class="success-actions">
               <a href="index.html" class="btn btn-primary">Back to Scripts</a>
@@ -588,18 +370,33 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-inner">
-      <div class="footer-logo">
-        <span class="logo-icon">⚡</span>
-        <span class="logo-text">ZenScripts</span>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="footer-logo-img" />
+          <p>Free scripts for the gaming community. No paywalls. No limits.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Site</h4>
+          <a href="index.html#scripts">Browse Scripts</a>
+          <a href="index.html#partners">Partners</a>
+          <a href="ad-form.html">Advertise</a>
+        </div>
+        <div class="footer-col">
+          <h4>Partners</h4>
+          <a href="https://cheapsmm.lol" target="_blank" rel="noopener">CheapSMM</a>
+          <a href="https://zenscripts.pro" target="_blank" rel="noopener">ZenScripts Pro</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener">Discord</a>
+          <a href="ad-form.html">Place an Ad</a>
+        </div>
       </div>
-      <p class="footer-copy">© 2024 ZenScripts. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="index.html#scripts">Scripts</a>
-        <a href="ad-form.html">Advertise</a>
+      <div class="footer-bottom">
+        <p>© 2024 ZenScripts. All rights reserved.</p>
+        <p class="footer-disc">Scripts are provided for educational purposes. Use responsibly.</p>
       </div>
     </div>
   </footer>
@@ -607,4 +404,3 @@
   <script src="adform.js"></script>
 </body>
 </html>
-
