@@ -1,12 +1,5 @@
-Great catches on the optimizations. Let me fix all of it including the scripts not loading from JSON. The most likely cause is a path or syntax issue. Here is the complete fixed app.js with every optimization applied.
-
----
-
-## app.js (complete optimized fixed file)
-
-```javascript
 /* ═══════════════════════════════════════════════════════════
-   APP.JS — ZenScripts (Optimized)
+   APP.JS — ZenScripts
 ═══════════════════════════════════════════════════════════ */
 
 const PAGE_SIZE = 12;
@@ -20,14 +13,11 @@ let searchQuery    = '';
 let sortMode       = 'popular';
 let searchTimeout  = null;
 
-/* ══════════════════════════════════════════════
-   BOOT — fetch data.json
-══════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
 
   fetch('./data.json')
     .then(res => {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (!res.ok) throw new Error('HTTP error ' + res.status);
       return res.json();
     })
     .then(data => {
@@ -43,26 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
       bindEvents();
     })
     .catch(err => {
-      console.error('Failed to load data.json:', err);
+      console.error('data.json error:', err);
       const grid = document.getElementById('scripts-grid');
       if (grid) {
         grid.innerHTML = `
           <div style="
-            grid-column: 1/-1;
-            text-align: center;
-            padding: 60px 20px;
-            color: #6b6b8a;
+            grid-column:1/-1;
+            text-align:center;
+            padding:60px 20px;
+            color:#6b6b8a;
           ">
             <div style="font-size:2.5rem;margin-bottom:12px;">⚠️</div>
             <h3 style="color:#f0f0ff;margin-bottom:8px;">Failed to load scripts</h3>
-            <p>Could not load data.json. Make sure it is in the same folder as index.html.</p>
-            <p style="margin-top:8px;font-size:0.8rem;">Error: ${err.message}</p>
+            <p>Could not load data.json — check the browser console for details.</p>
+            <p style="margin-top:8px;font-size:0.8rem;opacity:0.6;">${err.message}</p>
           </div>
         `;
       }
     });
 
-  /* Navbar scroll */
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -75,9 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
 ══════════════════════════════════════════════ */
 function buildPartners(partners) {
   const grid = document.getElementById('partners-grid');
-  if (!grid || !partners.length) return;
+  if (!grid) {
+    console.warn('partners-grid element not found');
+    return;
+  }
+  if (!partners.length) {
+    console.warn('No partners in data.json');
+    return;
+  }
 
-  const html = partners.map(p => `
+  grid.innerHTML = partners.map(p => `
     <a class="partner-card" href="${safe(p.url)}" target="_blank" rel="noopener">
       <div class="partner-top">
         <div class="partner-logo-wrap">
@@ -92,10 +88,7 @@ function buildPartners(partners) {
             <div class="partner-tagline">${safe(p.tagline)}</div>
           </div>
         </div>
-        <div
-          class="partner-badge"
-          style="color:${safe(p.badgeColor)};border-color:${safe(p.badgeColor)};background:${safe(p.badgeColor)}18;"
-        >
+        <div class="partner-badge" style="color:${safe(p.badgeColor)};border-color:${safe(p.badgeColor)};background:${safe(p.badgeColor)}18;">
           ${safe(p.badge)}
         </div>
       </div>
@@ -109,25 +102,22 @@ function buildPartners(partners) {
       </div>
     </a>
   `).join('');
-
-  grid.innerHTML = html;
 }
 
 /* ══════════════════════════════════════════════
    BUILD BANNERS
 ══════════════════════════════════════════════ */
 function buildBanners(banners) {
-  const positionMap = {
+  const map = {
     'hero-bottom': 'slot-hero',
     'mid-content': 'slot-mid',
     'sidebar':     'slot-sidebar',
     'pre-footer':  'slot-footer',
   };
-
   banners.forEach(b => {
-    const slotId = positionMap[b.position];
-    if (!slotId) return;
-    const slot = document.getElementById(slotId);
+    const id   = map[b.position];
+    if (!id) return;
+    const slot = document.getElementById(id);
     if (!slot) return;
     slot.innerHTML = b.position === 'sidebar' ? boxBanner(b) : wideBanner(b);
   });
@@ -162,13 +152,12 @@ function boxBanner(b) {
 ══════════════════════════════════════════════ */
 function buildCategories(categories) {
   const tabs = document.getElementById('cat-tabs');
-  if (!tabs || !categories.length) return;
-
+  if (!tabs) {
+    console.warn('cat-tabs element not found');
+    return;
+  }
   tabs.innerHTML = categories.map(c => `
-    <button
-      class="cat-tab ${c.id === 'all' ? 'active' : ''}"
-      data-cat="${safe(c.id)}"
-    >
+    <button class="cat-tab ${c.id === 'all' ? 'active' : ''}" data-cat="${safe(c.id)}">
       <span>${safe(c.icon)}</span>
       <span>${safe(c.name)}</span>
     </button>
@@ -180,8 +169,10 @@ function buildCategories(categories) {
 ══════════════════════════════════════════════ */
 function buildSidebarStats(scripts) {
   const card = document.getElementById('sidebar-stats');
-  if (!card) return;
-
+  if (!card) {
+    console.warn('sidebar-stats element not found');
+    return;
+  }
   const totalDownloads = scripts.reduce((a, s) => a + (s.downloads || 0), 0);
   const totalScripts   = scripts.length;
   const games          = new Set(scripts.map(s => s.game)).size;
@@ -208,22 +199,19 @@ function buildSidebarStats(scripts) {
 }
 
 /* ══════════════════════════════════════════════
-   APPLY FILTERS — optimized
+   APPLY FILTERS
 ══════════════════════════════════════════════ */
 function applyFilters() {
   let results = [...allScripts];
 
-  /* Category filter */
   if (activeCategory !== 'all') {
     results = results.filter(s => s.category === activeCategory);
   }
 
-  /* Tag filter */
   if (activeTag !== 'all') {
     results = results.filter(s => Array.isArray(s.tags) && s.tags.includes(activeTag));
   }
 
-  /* Search filter */
   const q = searchQuery.trim().toLowerCase();
   if (q !== '') {
     results = results.filter(s =>
@@ -233,7 +221,6 @@ function applyFilters() {
     );
   }
 
-  /* Sort — optimized */
   if (sortMode === 'popular') {
     results.sort((a, b) => (b.downloads || 0) - (a.downloads || 0));
   } else if (sortMode === 'newest') {
@@ -248,7 +235,7 @@ function applyFilters() {
 }
 
 /* ══════════════════════════════════════════════
-   RENDER SCRIPTS — uses DocumentFragment
+   RENDER SCRIPTS
 ══════════════════════════════════════════════ */
 function renderScripts() {
   const grid      = document.getElementById('scripts-grid');
@@ -256,9 +243,11 @@ function renderScripts() {
   const loadWrap  = document.getElementById('load-more-wrap');
   const countEl   = document.getElementById('result-count');
 
-  if (!grid) return;
+  if (!grid) {
+    console.warn('scripts-grid element not found');
+    return;
+  }
 
-  /* No results */
   if (filtered.length === 0) {
     grid.innerHTML = '';
     if (noResults) noResults.classList.remove('hidden');
@@ -271,20 +260,18 @@ function renderScripts() {
 
   const slice = filtered.slice(0, page * PAGE_SIZE);
 
-  /* Build using DocumentFragment for performance */
   const fragment = document.createDocumentFragment();
-  slice.forEach((s, i) => {
-    const div = document.createElement('div');
+
+  slice.forEach(s => {
+    const div  = document.createElement('div');
     div.innerHTML = scriptCard(s);
     const card = div.firstElementChild;
 
-    /* Click card to open modal */
     card.addEventListener('click', e => {
       if (e.target.classList.contains('script-dl-btn')) return;
       openModal(s);
     });
 
-    /* Download button */
     const dlBtn = card.querySelector('.script-dl-btn');
     if (dlBtn) {
       dlBtn.addEventListener('click', e => {
@@ -299,12 +286,10 @@ function renderScripts() {
   grid.innerHTML = '';
   grid.appendChild(fragment);
 
-  /* Update count */
   if (countEl) {
     countEl.textContent = `${filtered.length} script${filtered.length !== 1 ? 's' : ''} found`;
   }
 
-  /* Load more button */
   if (loadWrap) {
     if (slice.length < filtered.length) {
       loadWrap.classList.remove('hidden');
@@ -357,7 +342,7 @@ function openModal(s) {
     <div class="modal-game">${safe(s.game)}</div>
     <div class="modal-name">${safe(s.name)}</div>
     ${s.version ? `<div class="modal-version">Version: ${safe(s.version)}</div>` : ''}
-    ${tags      ? `<div class="modal-tags">${tags}</div>`                         : ''}
+    ${tags      ? `<div class="modal-tags">${tags}</div>` : ''}
     <div class="modal-desc">${safe(s.description)}</div>
     ${features  ? `
       <div class="modal-section-title">Features</div>
@@ -397,46 +382,34 @@ function handleDownload(url) {
 }
 
 /* ══════════════════════════════════════════════
-   HELPER — build tag pills
+   HELPERS
 ══════════════════════════════════════════════ */
 function buildTags(tags) {
   if (!Array.isArray(tags) || tags.length === 0) return '';
   return tags.map(t => {
     if (t === 'new')         return `<span class="tag tag-new-pill">🟢 New</span>`;
-    if    (t === 'popular')     return `<span class="tag tag-pop-pill">🔥 Popular</span>`;
+    if (t === 'popular')     return `<span class="tag tag-pop-pill">🔥 Popular</span>`;
     if (t === 'recommended') return `<span class="tag tag-rec-pill">⭐ Recommended</span>`;
     return '';
   }).join('');
 }
 
-/* ══════════════════════════════════════════════
-   HELPER — build feature pills
-══════════════════════════════════════════════ */
 function buildFeaturePills(features, limit) {
   if (!Array.isArray(features) || features.length === 0) return '';
   const list = limit ? features.slice(0, limit) : features;
   return list.map(f => `<span class="feature-pill">${safe(f)}</span>`).join('');
 }
 
-/* ══════════════════════════════════════════════
-   HELPER — build executor pills
-══════════════════════════════════════════════ */
 function buildExecutorPills(executors) {
   if (!Array.isArray(executors) || executors.length === 0) return '';
   return executors.map(e => `<span class="modal-executor">${safe(e)}</span>`).join('');
 }
 
-/* ══════════════════════════════════════════════
-   HELPER — safe string (prevent undefined/null in UI)
-══════════════════════════════════════════════ */
 function safe(val) {
   if (val === null || val === undefined) return '';
   return String(val);
 }
 
-/* ══════════════════════════════════════════════
-   HELPER — format numbers
-══════════════════════════════════════════════ */
 function formatNum(n) {
   if (!n || isNaN(n)) return '0';
   if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
@@ -449,7 +422,6 @@ function formatNum(n) {
 ══════════════════════════════════════════════ */
 function bindEvents() {
 
-  /* ── Hamburger ── */
   const hamburger  = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   if (hamburger && mobileMenu) {
@@ -459,7 +431,6 @@ function bindEvents() {
     });
   }
 
-  /* ── Search with debounce ── */
   const searchInput = document.getElementById('search');
   const clearBtn    = document.getElementById('search-clear');
 
@@ -468,9 +439,7 @@ function bindEvents() {
       clearTimeout(searchTimeout);
       searchQuery = searchInput.value;
       if (clearBtn) clearBtn.style.display = searchQuery ? 'block' : 'none';
-      searchTimeout = setTimeout(() => {
-        applyFilters();
-      }, 250);
+      searchTimeout = setTimeout(() => applyFilters(), 250);
     });
   }
 
@@ -485,7 +454,6 @@ function bindEvents() {
     });
   }
 
-  /* ── Sort ── */
   const sortEl = document.getElementById('sort');
   if (sortEl) {
     sortEl.addEventListener('change', () => {
@@ -494,7 +462,6 @@ function bindEvents() {
     });
   }
 
-  /* ── Category tabs ── */
   const catTabs = document.getElementById('cat-tabs');
   if (catTabs) {
     catTabs.addEventListener('click', e => {
@@ -507,8 +474,7 @@ function bindEvents() {
     });
   }
 
-  /* ── Tag filter buttons ── */
-  const tagRow = document.getElementById('tag-filters') || document.querySelector('.tag-row');
+  const tagRow = document.querySelector('.tag-row');
   if (tagRow) {
     tagRow.addEventListener('click', e => {
       const btn = e.target.closest('.tag-btn');
@@ -520,25 +486,14 @@ function bindEvents() {
     });
   }
 
-  /* ── Load more ── */
   const loadMoreBtn = document.getElementById('load-more');
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
       page++;
       renderScripts();
-      /* Scroll to where new cards start */
-      const grid = document.getElementById('scripts-grid');
-      if (grid) {
-        const cards = grid.querySelectorAll('.script-card');
-        const firstNew = cards[(page - 1) * PAGE_SIZE];
-        if (firstNew) {
-          firstNew.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }
     });
   }
 
-  /* ── Clear all filters ── */
   const clearAll = document.getElementById('clear-all');
   if (clearAll) {
     clearAll.addEventListener('click', () => {
@@ -569,13 +524,11 @@ function bindEvents() {
     });
   }
 
-  /* ── Modal close button ── */
   const modalClose = document.getElementById('modal-close');
   if (modalClose) {
     modalClose.addEventListener('click', closeModal);
   }
 
-  /* ── Modal overlay click outside ── */
   const modalOverlay = document.getElementById('modal-overlay');
   if (modalOverlay) {
     modalOverlay.addEventListener('click', e => {
@@ -583,7 +536,6 @@ function bindEvents() {
     });
   }
 
-  /* ── Escape key closes modal ── */
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
   });
