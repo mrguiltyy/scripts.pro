@@ -248,4 +248,61 @@ document.addEventListener('DOMContentLoaded', () => {
       detailsEl.innerHTML = rows.map(r => `
         <div class="sdet-row">
           <span>${r.label}</span>
-          <span>${r.value || 'N/
+          <span>${r.value || 'N/A'}</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  /* ── Submit Another button ── */
+  const submitAnother = document.getElementById('submit-another');
+  if (submitAnother) {
+    submitAnother.addEventListener('click', () => {
+      const formEl    = document.getElementById('ad-form');
+      const successEl = document.getElementById('form-success');
+      const btn       = document.getElementById('submit-btn');
+
+      if (formEl) {
+        formEl.reset();
+        formEl.classList.remove('hidden');
+      }
+      if (successEl) {
+        successEl.classList.add('hidden');
+        successEl.classList.remove('visible');
+      }
+      if (btn) {
+        btn.textContent = 'Submit Ad Order →';
+        btn.disabled = false;
+      }
+
+      /* Reset char counters */
+      const counters = [
+        { inputId: 'adTitle', countId: 'count-adTitle', max: 80 },
+        { inputId: 'adDesc',  countId: 'count-adDesc',  max: 300 },
+        { inputId: 'adCta',   countId: 'count-adCta',   max: 30 },
+        { inputId: 'notes',   countId: 'count-notes',   max: 500 },
+      ];
+      counters.forEach(({ countId, max }) => {
+        const el = document.getElementById(countId);
+        if (el) el.textContent = `0 / ${max}`;
+      });
+
+      /* Reset duration pills */
+      document.querySelectorAll('.dur-pill').forEach(p => p.classList.remove('active'));
+
+      /* Clear all errors */
+      document.querySelectorAll('.ferr').forEach(el => el.textContent = '');
+      document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+
+      /* Scroll to top of form */
+      const formCard = document.querySelector('.form-card');
+      if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+});  /* ── Escape key closes modal ── */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+});
