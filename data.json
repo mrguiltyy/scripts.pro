@@ -45,13 +45,6 @@
       "subtext": "Thousands of daily visitors see this space"
     },
     {
-      "id": "banner-sidebar",
-      "position": "sidebar",
-      "label": "Advertisement",
-      "cta": "Advertise Here",
-      "subtext": "Target our gaming audience directly"
-    },
-    {
       "id": "banner-footer",
       "position": "pre-footer",
       "label": "Advertisement",
@@ -60,100 +53,134 @@
     }
   ],
   "categories": [
-    { "id": "all", "name": "All Scripts", "icon": "⚡" },
-    { "id": "rust", "name": "Rust", "icon": "🔧" },
-    { "id": "r6", "name": "Rainbow Six", "icon": "🛡️" },
-    { "id": "cod", "name": "Call of Duty", "icon": "🎯" },
-    { "id": "minecraft", "name": "Minecraft", "icon": "⛏️" },
-    { "id": "valorant", "name": "Valorant", "icon": "💠" },
-    { "id": "csgo", "name": "CS2 / CSGO", "icon": "💣" },
-    { "id": "fortnite", "name": "Fortnite", "icon": "🏗️" },
-    { "id": "utility", "name": "Utility & Tools", "icon": "🔩" }
+    { "id": "all",       "name": "All Scripts",     "icon": "⚡" },
+    { "id": "rust",      "name": "Rust",             "icon": "🔧" },
+    { "id": "apex",      "name": "Apex Legends",     "icon": "🎮" },
+    { "id": "r6",        "name": "Rainbow Six",      "icon": "🛡️" },
+    { "id": "cod",       "name": "Call of Duty",     "icon": "🎯" },
+    { "id": "fortnite",  "name": "Fortnite",         "icon": "🏗️" },
+    { "id": "minecraft", "name": "Minecraft",        "icon": "⛏️" },
+    { "id": "valorant",  "name": "Valorant",         "icon": "💠" },
+    { "id": "csgo",      "name": "CS2 / CSGO",       "icon": "💣" },
+    { "id": "utility",   "name": "Utility & Tools",  "icon": "🔩" }
   ],
   "scripts": [
     {
-      "name": "Rust Scripts PS5 PS4, XBOX, PC",
+      "name": "Rust No Recoil Script — PS5, PS4, Xbox, PC",
       "game": "Rust",
       "category": "rust",
       "description": "Full no-recoil macro for all Rust weapons. Supports AK, LR300, MP5, SAR and more.",
       "tags": ["popular", "recommended"],
       "version": "N/A",
       "executor": ["Logitech GHub", "Titan", "Zen"],
-      "downloads": 1,
-      "features": ["All Weapons", "Pattern Compensation", "Sensitivity Adjust", "Attachment Support", "Crouch Comp"],
+      "downloads": 614,
+      "features": [
+        "All Weapons",
+        "Pattern Compensation",
+        "Sensitivity Adjust",
+        "Attachment Support",
+        "Crouch Comp"
+      ],
       "downloadUrl": "https://linkvertise.com/4963039/NEB2Laq6FjNF?o=sharing"
-    },
-    {
-      "name": " Apex Scripts (Updated) PS5 PS4, XBOX, PC",
-      "game": "Rust",
-      "category": "rust",
-      "description": "Precision AK recoil script with full spray pattern. Adjustable DPI and sensitivity settings.",
-      "tags": ["popular"],
-      "version": "N/A",
-      "executor": ["Zen"],
-      "downloads": 1,
-      "features": ["All gun Patterns", "Toggle"],
-      "downloadUrl": "https://linkvertise.com/4963039/XHmqSDmt8HgI?o=sharing"
     },
     {
       "name": "Rust Random Script",
       "game": "Rust",
       "category": "rust",
-      "description": "Dedicated Thompson SMG no recoil script for Rust with perfect pattern mapping.",
+      "description": "Randomized recoil script for Rust. Keeps your spray pattern unpredictable and harder to detect.",
       "tags": ["new"],
       "version": "N/A",
       "executor": ["AutoHotkey", "Logitech GHub"],
-      "downloads": 1,
-      "features": ["All gun Patterns", "Fine tune Support", "Attachment Comp", "Toggle"],
+      "downloads": 214,
+      "features": [
+        "All Gun Patterns",
+        "Fine Tune Support",
+        "Attachment Comp",
+        "Toggle"
+      ],
       "downloadUrl": "https://linkvertise.com/4963039/NEB2Laq6FjNF?o=sharing"
     },
     {
-      "name": "R6 Siege No Recoil Zen Script :fine tune: (Panda Scripts) ",
+      "name": "Apex Legends No Recoil Script — PS5, PS4, Xbox, PC",
+      "game": "Apex Legends",
+      "category": "apex",
+      "description": "Precision no-recoil script for Apex Legends. Updated for all current weapons and legends.",
+      "tags": ["popular"],
+      "version": "N/A",
+      "executor": ["Zen"],
+      "downloads": 73,
+      "features": [
+        "All Gun Patterns",
+        "Toggle",
+        "Updated Regularly"
+      ],
+      "downloadUrl": "https://linkvertise.com/4963039/XHmqSDmt8HgI?o=sharing"
+    },
+    {
+      "name": "R6 Siege No Recoil Zen Script — Fine Tune (Panda Scripts)",
       "game": "Rainbow Six Siege",
       "category": "r6",
       "description": "Universal no-recoil macro for Rainbow Six Siege. Works with all operators and weapons.",
       "tags": ["new", "recommended"],
       "version": "N/A",
       "executor": ["Zen"],
-      "downloads": 1,
-      "features": ["All Operators", "Weapon Profiles", "Attachment Comp", "Rapid Fire"],
+      "downloads": 94,
+      "features": [
+        "All Operators",
+        "Weapon Profiles",
+        "Attachment Comp",
+        "Rapid Fire"
+      ],
       "downloadUrl": "https://linkvertise.com/4963039/YregjtZbLP7s?o=sharing"
     },
     {
-      "name": "Fortnite Zen Scripts XBOZ, PS5, PS4, PC",
-      "game": "Universal",
-      "category": "utility",
-      "description": "Universal no-recoil macro for Rainbow Six Siege. Works with all operators and weapons.",
-      "tags": ["new", "recommended"],
-      "version": "N/A",
-      "executor": ["Zen"],
-      "downloads": 1,
-      "features": ["Custom Settings", "Drop-Shot", "Soft Aim"],
-      "downloadUrl": "#"
-    },
-    {
-      "name": "cod Scripts ALL",
-      "game": "Cod",
-      "category": "utility",
-      "description": "Rapid fire macro that works across all games. Converts any weapon to full auto.",
+      "name": "Call of Duty Scripts — All Modes",
+      "game": "Call of Duty",
+      "category": "cod",
+      "description": "Full no-recoil and rapid fire macro for Call of Duty. Works across Warzone, MW3 and Black Ops.",
       "tags": ["popular"],
       "version": "N/A",
       "executor": ["Zen"],
-      "downloads": 1,
-      "features": ["Any Game", "Configurable Rate", "Toggle", "Lightweight"],
+      "downloads": 100,
+      "features": [
+        "Any Game Mode",
+        "Configurable Rate",
+        "Toggle",
+        "Lightweight"
+      ],
       "downloadUrl": "https://linkvertise.com/4963039/A9hiPpEAQMHe?o=sharing"
     },
     {
-      "name": "Pc Auto Clicker",
-      "game": "Universal",
-      "category": "utility",
-      "description": "Universal no-recoil macro for Rainbow Six Siege. Works with all operators and weapons.",
+      "name": "Fortnite Zen Script — Xbox, PS5, PS4, PC",
+      "game": "Fortnite",
+      "category": "fortnite",
+      "description": "Fortnite script with soft aim, drop-shot and custom sensitivity settings for controller players.",
       "tags": ["new", "recommended"],
       "version": "N/A",
-      "executor": ["Pc"],
-      "downloads": 1,
-      "features": ["Fast", "Timed", "Custom"],
-      "downloadUrl": "#"
+      "executor": ["Zen"],
+      "downloads": 115,
+      "features": [
+        "Custom Settings",
+        "Drop-Shot",
+        "Soft Aim"
+      ],
+      "downloadUrl": "https://linkvertise.com/4963039/NEB2Laq6FjNF?o=sharing"
+    },
+    {
+      "name": "PC Auto Clicker",
+      "game": "Universal",
+      "category": "utility",
+      "description": "Lightweight auto clicker for PC. Fully configurable click rate, timer and toggle support.",
+      "tags": ["new", "recommended"],
+      "version": "N/A",
+      "executor": ["PC"],
+      "downloads": 34,
+      "features": [
+        "Fast Click Rate",
+        "Timed Mode",
+        "Custom Intervals"
+      ],
+      "downloadUrl": "https://linkvertise.com/4963039/NEB2Laq6FjNF?o=sharing"
     }
   ]
 }
