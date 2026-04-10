@@ -49,7 +49,61 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nav) nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 });
+document.addEventListener('DOMContentLoaded', () => {
 
+  /* ── Welcome Popup ── */
+  initWelcomePopup();
+
+  // ... rest of your existing code
+});
+
+/* ══════════════════════════════════════
+   WELCOME POPUP
+══════════════════════════════════════ */
+function initWelcomePopup() {
+  const overlay    = document.getElementById('welcome-overlay');
+  const closeBtn   = document.getElementById('welcome-close');
+  const enterBtn   = document.getElementById('welcome-enter');
+  const dontShow   = document.getElementById('dont-show-again');
+
+  if (!overlay) return;
+
+  /* Check if user already dismissed it */
+  if (localStorage.getItem('zs-welcome-dismissed') === 'true') {
+    overlay.classList.add('hidden');
+    return;
+  }
+
+  /* Show popup */
+  overlay.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+
+  /* Close function */
+  function closeWelcome() {
+    /* Save preference if checked */
+    if (dontShow && dontShow.checked) {
+      localStorage.setItem('zs-welcome-dismissed', 'true');
+    }
+    overlay.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  /* Close button */
+  if (closeBtn) closeBtn.addEventListener('click', closeWelcome);
+
+  /* Enter button */
+  if (enterBtn) enterBtn.addEventListener('click', closeWelcome);
+
+  /* Click outside to close */
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeWelcome();
+  });
+
+  /* Escape key */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeWelcome();
+  });
+}
 /* ── Partners ── */
 function buildPartners(partners) {
   const grid = document.getElementById('partners-grid');
