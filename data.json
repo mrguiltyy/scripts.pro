@@ -60,15 +60,15 @@
     }
   ],
   "categories": [
-    { "id": "all",       "name": "All Scripts",    "icon": "⚡" },
-    { "id": "rust",      "name": "Rust",            "icon": "🔧" },
-    { "id": "r6",        "name": "Rainbow Six",     "icon": "🛡️" },
-    { "id": "cod",       "name": "Call of Duty",    "icon": "🎯" },
-    { "id": "minecraft", "name": "Minecraft",       "icon": "⛏️" },
-    { "id": "valorant",  "name": "Valorant",        "icon": "💠" },
-    { "id": "csgo",      "name": "CS2 / CSGO",      "icon": "💣" },
-    { "id": "fortnite",  "name": "Fortnite",        "icon": "🏗️" },
-    { "id": "utility",   "name": "Utility & Tools", "icon": "🔩" }
+    { "id": "all", "name": "All Scripts", "icon": "⚡" },
+    { "id": "rust", "name": "Rust", "icon": "🔧" },
+    { "id": "r6", "name": "Rainbow Six", "icon": "🛡️" },
+    { "id": "cod", "name": "Call of Duty", "icon": "🎯" },
+    { "id": "minecraft", "name": "Minecraft", "icon": "⛏️" },
+    { "id": "valorant", "name": "Valorant", "icon": "💠" },
+    { "id": "csgo", "name": "CS2 / CSGO", "icon": "💣" },
+    { "id": "fortnite", "name": "Fortnite", "icon": "🏗️" },
+    { "id": "utility", "name": "Utility & Tools", "icon": "🔩" }
   ],
   "scripts": [
     {
@@ -83,7 +83,7 @@
       "features": ["All Weapons", "Pattern Compensation", "Sensitivity Adjust", "Attachment Support", "Crouch Comp"],
       "downloadUrl": "https://linkvertise.com/4963039/NEB2Laq6FjNF?o=sharing"
     },
-    {  
+    {
       "name": " Apex Scripts (Updated) PS5 PS4, XBOX, PC",
       "game": "Rust",
       "category": "rust",
@@ -114,24 +114,23 @@
       "description": "Universal no-recoil macro for Rainbow Six Siege. Works with all operators and weapons.",
       "tags": ["new", "recommended"],
       "version": "N/A",
-      "executor":"Zen"],
+      "executor": ["Zen"],
       "downloads": 1,
       "features": ["All Operators", "Weapon Profiles", "Attachment Comp", "Rapid Fire"],
       "downloadUrl": "https://linkvertise.com/4963039/YregjtZbLP7s?o=sharing"
     },
-{
+    {
       "name": "Fortnite Zen Scripts XBOZ, PS5, PS4, PC",
       "game": "Universal",
       "category": "utility",
       "description": "Universal no-recoil macro for Rainbow Six Siege. Works with all operators and weapons.",
       "tags": ["new", "recommended"],
       "version": "N/A",
-      "executor":"Zen"],
+      "executor": ["Zen"],
       "downloads": 1,
       "features": ["Custom Settings", "Drop-Shot", "Soft Aim"],
       "downloadUrl": "#"
     },
-
     {
       "name": "cod Scripts ALL",
       "game": "Cod",
@@ -143,18 +142,18 @@
       "downloads": 1,
       "features": ["Any Game", "Configurable Rate", "Toggle", "Lightweight"],
       "downloadUrl": "https://linkvertise.com/4963039/A9hiPpEAQMHe?o=sharing"
-    }
-{
+    },
+    {
       "name": "Pc Auto Clicker",
       "game": "Universal",
       "category": "utility",
       "description": "Universal no-recoil macro for Rainbow Six Siege. Works with all operators and weapons.",
       "tags": ["new", "recommended"],
       "version": "N/A",
-      "executor":"Pc"],
+      "executor": ["Pc"],
       "downloads": 1,
       "features": ["Fast", "Timed", "Custom"],
       "downloadUrl": "#"
-    },
+    }
   ]
 }
