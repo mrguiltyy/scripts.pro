@@ -479,3 +479,29 @@ img { max-width: 100%; display: block; }
   .hstat { padding: 0 16px; }
   .modal-body { padding: 24px 18px; }
 }
+/* Coming Soon download button */
+.modal-dl-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: var(--dim);
+}
+
+/* Ctrl+K search hint */
+.search-box::after {
+  content: 'Ctrl K';
+  font-size: 0.65rem;
+  color: var(--dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Hide hint on mobile */
+@media (max-width: 768px) {
+  .search-box::after {
+    display: none;
+  }
+}
