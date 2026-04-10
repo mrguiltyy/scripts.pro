@@ -34,6 +34,68 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
+  <!-- Welcome Popup -->
+<div class="welcome-overlay" id="welcome-overlay">
+  <div class="welcome-modal">
+    
+    <!-- Close Button -->
+    <button class="welcome-close" id="welcome-close">✕</button>
+
+    <!-- Header -->
+    <div class="welcome-header">
+      <img src="https://storage.perfectcdn.com/n4s4s1/3c0zw7ujt2i3axow.png" alt="ZenScripts" class="welcome-logo" />
+      <h2>Welcome to <span class="gradient-text">ZenScripts</span></h2>
+      <p>The #1 free scripts hub for gamers</p>
+    </div>
+
+    <!-- Cards -->
+    <div class="welcome-cards">
+
+      <!-- Discord -->
+      <a href="https://discord.gg/zenscripts" target="_blank" rel="noopener" class="welcome-card welcome-card-discord">
+        <div class="welcome-card-icon">💬</div>
+        <div class="welcome-card-text">
+          <span class="welcome-card-title">Join Our Discord</span>
+          <span class="welcome-card-sub">Get support, updates & early access</span>
+        </div>
+        <span class="welcome-card-arrow">→</span>
+      </a>
+
+      <!-- Premium Store -->
+      <a href="https://zenscripts.pro" target="_blank" rel="noopener" class="welcome-card welcome-card-premium">
+        <div class="welcome-card-icon">⭐</div>
+        <div class="welcome-card-text">
+          <span class="welcome-card-title">Premium Scripts Store</span>
+          <span class="welcome-card-sub">Unlock advanced scripts & features</span>
+        </div>
+        <span class="welcome-card-arrow">→</span>
+      </a>
+
+      <!-- Partner -->
+      <a href="https://cheapsmm.lol" target="_blank" rel="noopener" class="welcome-card welcome-card-partner">
+        <div class="welcome-card-icon">🤝</div>
+        <div class="welcome-card-text">
+          <span class="welcome-card-title">CheapSMM — Our Partner</span>
+          <span class="welcome-card-sub">Cheapest SMM panel online</span>
+        </div>
+        <span class="welcome-card-arrow">→</span>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="welcome-footer">
+      <label class="welcome-check">
+        <input type="checkbox" id="dont-show-again" />
+        <span>Don't show this again</span>
+      </label>
+      <button class="btn btn-primary" id="welcome-enter">
+        Browse Free Scripts →
+      </button>
+    </div>
+
+  </div>
+</div>
 <body>
 
   <nav class="navbar" id="navbar">
